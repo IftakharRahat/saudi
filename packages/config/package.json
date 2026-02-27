@@ -1,0 +1,19 @@
+{
+    "name": "@saudi/config",
+    "version": "0.0.0",
+    "private": true,
+    "main": "./index.ts",
+    "types": "./index.ts",
+    "exports": {
+        ".": {
+            "import": "./index.ts",
+            "types": "./index.ts"
+        },
+        "./eslint": {
+            "import": "./eslint.config.mjs"
+        },
+        "./tailwind": {
+            "import": "./tailwind.config.ts"
+        }
+    }
+}
