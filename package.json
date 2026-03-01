@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "pnpm --filter @saudi/web dev",
     "build": "pnpm --filter @saudi/web build",
-    "lint": "pnpm -r lint",
+    "lint": "pnpm --filter @saudi/web lint",
     "test": "pnpm --filter @saudi/web test",
     "dev:web": "pnpm --filter @saudi/web dev",
     "build:web": "pnpm --filter @saudi/web build",
