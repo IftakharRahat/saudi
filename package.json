@@ -6,8 +6,10 @@
     "dev": "pnpm --filter @saudi/web dev",
     "build": "pnpm --filter @saudi/web build",
     "lint": "pnpm -r lint",
+    "test": "pnpm --filter @saudi/web test",
     "dev:web": "pnpm --filter @saudi/web dev",
-    "build:web": "pnpm --filter @saudi/web build"
+    "build:web": "pnpm --filter @saudi/web build",
+    "test:web": "pnpm --filter @saudi/web test"
   },
   "packageManager": "pnpm@10.27.0"
 }

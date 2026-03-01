@@ -1,6 +1,6 @@
 'use client';
 
-import React, { createContext, useContext, useEffect, useMemo, useState } from 'react';
+import React, { createContext, useContext, useState } from 'react';
 
 type Lang = 'en' | 'ar';
 
@@ -690,25 +690,32 @@ type I18nCtx = {
 
 const Ctx = createContext<I18nCtx | null>(null);
 
-export function I18nProvider({ children }: { children: React.ReactNode }) {
-  const [lang, setLangState] = useState<Lang>('en');
+function getInitialLang(): Lang {
+  if (typeof window === 'undefined') {
+    return 'en';
+  }
 
-  useEffect(() => {
-    const saved = window.localStorage.getItem('lang');
-    if (saved === 'en' || saved === 'ar') setLangState(saved);
-  }, []);
+  const saved = window.localStorage.getItem('lang');
+  if (saved === 'en' || saved === 'ar') {
+    return saved;
+  }
+
+  return 'en';
+}
+
+export function I18nProvider({ children }: { children: React.ReactNode }) {
+  const [lang, setLangState] = useState<Lang>(getInitialLang);
 
   const setLang = (l: Lang) => {
     setLangState(l);
-    window.localStorage.setItem('lang', l);
+    if (typeof window !== 'undefined') {
+      window.localStorage.setItem('lang', l);
+    }
   };
 
   const toggle = () => setLang(lang === 'en' ? 'ar' : 'en');
-
-  const value = useMemo<I18nCtx>(() => {
-    const dir: 'ltr' | 'rtl' = lang === 'ar' ? 'rtl' : 'ltr';
-    return { lang, dir, t: DICT[lang], toggle, setLang };
-  }, [lang]);
+  const dir: 'ltr' | 'rtl' = lang === 'ar' ? 'rtl' : 'ltr';
+  const value: I18nCtx = { lang, dir, t: DICT[lang], toggle, setLang };
 
   return <Ctx.Provider value={value}>{children}</Ctx.Provider>;
 }

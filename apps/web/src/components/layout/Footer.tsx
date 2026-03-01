@@ -1,10 +1,45 @@
 'use client';
 
 import Image from 'next/image';
+import { FormEvent, useState } from 'react';
 import { useI18n } from '@/i18n/I18nProvider';
+import { submitNewsletter } from '@/lib/frontend-api';
 
 export default function Footer() {
   const { t } = useI18n();
+  const [email, setEmail] = useState('');
+  const [agreed, setAgreed] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [statusMessage, setStatusMessage] = useState('');
+  const [statusType, setStatusType] = useState<'idle' | 'success' | 'error'>('idle');
+
+  const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setStatusMessage('');
+    setStatusType('idle');
+
+    if (!agreed) {
+      setStatusType('error');
+      setStatusMessage('Please confirm the consent checkbox before subscribing.');
+      return;
+    }
+
+    setIsSubmitting(true);
+
+    try {
+      const result = await submitNewsletter(email);
+      setStatusType(result.ok ? 'success' : 'error');
+      setStatusMessage(result.message);
+      if (result.ok) {
+        setEmail('');
+      }
+    } catch {
+      setStatusType('error');
+      setStatusMessage('Failed to subscribe right now. Please try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   return (
     <footer className="w-full bg-[#F9F9FA]">
@@ -44,20 +79,41 @@ export default function Footer() {
         <div>
           <h3 className="mb-3 text-lg font-semibold">{t.footerSubscribeTitle}</h3>
 
-          <div className="flex overflow-hidden rounded-[5px] border border-black/10 bg-white">
-            <input
-              className="h-[57px] flex-1 px-4 text-sm outline-none"
-              placeholder={t.footerEmailPlaceholder}
-            />
-            <button className="h-[57px] w-[161px] bg-[#004FCE] text-sm font-semibold text-white">
-              {t.footerSubscribe}
-            </button>
-          </div>
+          <form onSubmit={onSubmit}>
+            <div className="flex overflow-hidden rounded-[5px] border border-black/10 bg-white">
+              <input
+                type="email"
+                value={email}
+                onChange={(event) => setEmail(event.target.value)}
+                required
+                className="h-[57px] flex-1 px-4 text-sm outline-none"
+                placeholder={t.footerEmailPlaceholder}
+              />
+              <button
+                type="submit"
+                disabled={isSubmitting}
+                className="h-[57px] w-[161px] bg-[#004FCE] text-sm font-semibold text-white disabled:opacity-70"
+              >
+                {isSubmitting ? 'Submitting...' : t.footerSubscribe}
+              </button>
+            </div>
 
-          <label className="mt-3 flex items-center gap-2 text-xs text-[#333]">
-            <input type="checkbox" className="h-4 w-4" />
-            {t.footerAgree}
-          </label>
+            <label className="mt-3 flex items-center gap-2 text-xs text-[#333]">
+              <input
+                type="checkbox"
+                checked={agreed}
+                onChange={(event) => setAgreed(event.target.checked)}
+                className="h-4 w-4"
+              />
+              {t.footerAgree}
+            </label>
+
+            {statusType !== 'idle' && (
+              <p className={`mt-2 text-xs ${statusType === 'success' ? 'text-green-700' : 'text-red-600'}`}>
+                {statusMessage}
+              </p>
+            )}
+          </form>
         </div>
       </div>
 

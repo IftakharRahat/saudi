@@ -1,29 +1,77 @@
 'use client';
 
-import { useMemo, useState } from 'react';
+import { FormEvent, useMemo, useState } from 'react';
 import { useI18n } from '@/i18n/I18nProvider';
+import { submitContactForm } from '@/lib/frontend-api';
+
+type ContactFormState = {
+  name: string;
+  phone: string;
+  email: string;
+  location: string;
+  message: string;
+};
+
+type ContactFieldKey = keyof Omit<ContactFormState, 'message'>;
 
 export default function ContactPage() {
   const { t, dir } = useI18n();
 
-  // form state (frontend only for now)
-  const [form, setForm] = useState({
+  const [form, setForm] = useState<ContactFormState>({
     name: '',
     phone: '',
     email: '',
     location: '',
     message: '',
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+  const [submitMessage, setSubmitMessage] = useState('');
+  const [fieldErrors, setFieldErrors] = useState<Record<string, string[] | undefined>>({});
 
   const fields = useMemo(
     () => [
-      { key: 'name', label: t.contactFullName, placeholder: '' },
-      { key: 'phone', label: t.contactPhoneNumberLabel, placeholder: '' },
-      { key: 'email', label: t.contactEmailLabel, placeholder: '' },
-      { key: 'location', label: t.contactLocationLabel, placeholder: '' },
+      { key: 'name', label: t.contactFullName, type: 'text' },
+      { key: 'phone', label: t.contactPhoneNumberLabel, type: 'text' },
+      { key: 'email', label: t.contactEmailLabel, type: 'email' },
+      { key: 'location', label: t.contactLocationLabel, type: 'text' },
     ] as const,
     [t]
   );
+
+  const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setIsSubmitting(true);
+    setSubmitStatus('idle');
+    setSubmitMessage('');
+    setFieldErrors({});
+
+    try {
+      const result = await submitContactForm(form);
+      setSubmitStatus(result.ok ? 'success' : 'error');
+      setSubmitMessage(result.message);
+      setFieldErrors(result.fieldErrors);
+
+      if (result.ok) {
+        setForm({
+          name: '',
+          phone: '',
+          email: '',
+          location: '',
+          message: '',
+        });
+      }
+    } catch {
+      setSubmitStatus('error');
+      setSubmitMessage('Failed to submit contact form. Please try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  const onChangeField = (key: ContactFieldKey, value: string) => {
+    setForm((prev) => ({ ...prev, [key]: value }));
+  };
 
   return (
     <div className="w-full bg-white">
@@ -106,38 +154,59 @@ export default function ContactPage() {
               {t.contactFormSubtitle}
             </p>
 
-            {/* Form grid like figma (2 columns on desktop) */}
-            <div className="mt-10 grid gap-6 lg:grid-cols-2">
-              {fields.map((f) => (
-                <div key={f.key} className="space-y-3">
-                  <label className="block text-[16px] font-semibold leading-6 text-[#666]">
-                    {f.label}
-                  </label>
-                  <input
-                    value={(form as any)[f.key]}
-                    onChange={(e) => setForm((p) => ({ ...p, [f.key]: e.target.value }))}
-                    className="h-[55px] w-full rounded-[5px] border-2 border-[#999999] bg-white px-4 text-sm outline-none"
-                  />
-                </div>
-              ))}
-            </div>
+            <form onSubmit={onSubmit}>
+              {/* Form grid like figma (2 columns on desktop) */}
+              <div className="mt-10 grid gap-6 lg:grid-cols-2">
+                {fields.map((field) => (
+                  <div key={field.key} className="space-y-3">
+                    <label className="block text-[16px] font-semibold leading-6 text-[#666]">
+                      {field.label}
+                    </label>
+                    <input
+                      type={field.type}
+                      value={form[field.key]}
+                      onChange={(event) => onChangeField(field.key, event.target.value)}
+                      required
+                      className="h-[55px] w-full rounded-[5px] border-2 border-[#999999] bg-white px-4 text-sm outline-none"
+                    />
+                    {fieldErrors[field.key]?.[0] && (
+                      <p className="text-xs text-red-600">{fieldErrors[field.key]?.[0]}</p>
+                    )}
+                  </div>
+                ))}
+              </div>
 
-            {/* Message full width */}
-            <div className="mt-6 space-y-3">
-              <label className="block text-[16px] font-semibold leading-6 text-[#666]">
-                {t.contactMessageLabel}
-              </label>
-              <textarea
-                value={form.message}
-                onChange={(e) => setForm((p) => ({ ...p, message: e.target.value }))}
-                className="h-[189px] w-full resize-none rounded-[5px] border-2 border-[#999999] bg-white p-4 text-sm outline-none"
-              />
-            </div>
+              {/* Message full width */}
+              <div className="mt-6 space-y-3">
+                <label className="block text-[16px] font-semibold leading-6 text-[#666]">
+                  {t.contactMessageLabel}
+                </label>
+                <textarea
+                  value={form.message}
+                  onChange={(event) => setForm((prev) => ({ ...prev, message: event.target.value }))}
+                  required
+                  className="h-[189px] w-full resize-none rounded-[5px] border-2 border-[#999999] bg-white p-4 text-sm outline-none"
+                />
+                {fieldErrors.message?.[0] && (
+                  <p className="text-xs text-red-600">{fieldErrors.message?.[0]}</p>
+                )}
+              </div>
 
-            {/* Button full width */}
-            <button className="mt-10 h-[50px] w-full rounded-[5px] bg-[#004FCE] px-5 text-sm font-semibold text-white">
-              {t.contactSendButton}
-            </button>
+              {/* Button full width */}
+              <button
+                type="submit"
+                disabled={isSubmitting}
+                className="mt-10 h-[50px] w-full rounded-[5px] bg-[#004FCE] px-5 text-sm font-semibold text-white disabled:opacity-70"
+              >
+                {isSubmitting ? 'Sending...' : t.contactSendButton}
+              </button>
+
+              {submitStatus !== 'idle' && (
+                <p className={`mt-3 text-sm ${submitStatus === 'success' ? 'text-green-700' : 'text-red-600'}`}>
+                  {submitMessage}
+                </p>
+              )}
+            </form>
           </section>
         </div>
       </div>
