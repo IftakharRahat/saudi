@@ -21,6 +21,10 @@ function createEmptyResults(): SearchResults {
   };
 }
 
+function getServiceHref(id: string) {
+  return id.startsWith('fallback-') ? '/contact' : `/services/${id}`;
+}
+
 function SearchPageFallback() {
   return (
     <div className="w-full bg-white">
@@ -138,7 +142,7 @@ function SearchPageContent() {
                         {pickLocalized(lang, service.descriptionEn, service.descriptionAr)}
                       </p>
                       <Link
-                        href="/services"
+                        href={getServiceHref(service.id)}
                         className="mt-4 inline-flex h-[34px] items-center rounded-[5px] bg-[#004FCE] px-4 text-xs font-semibold text-white"
                       >
                         {t.viewMore}

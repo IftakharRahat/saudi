@@ -59,6 +59,18 @@ export async function fetchServices() {
   return fetchData<ServiceRecord>('/api/services', 1, 100);
 }
 
+export async function fetchServiceById(id: string) {
+  const response = await fetch(`/api/services/${id}`, { cache: 'no-store' });
+  if (response.status === 404) {
+    return null;
+  }
+  if (!response.ok) {
+    throw new Error(`Request failed for /api/services/${id}: ${response.status}`);
+  }
+  const payload = await parseJson<ApiDataPayload<ServiceRecord>>(response);
+  return payload?.data ?? null;
+}
+
 export async function fetchServiceAreas() {
   return fetchData<ServiceAreaRecord>('/api/areas', 1, 100);
 }

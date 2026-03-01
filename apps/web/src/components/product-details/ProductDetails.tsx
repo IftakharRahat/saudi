@@ -1,6 +1,7 @@
 'use client';
 
 import Image from 'next/image';
+import Link from 'next/link';
 import { useEffect, useMemo, useState } from 'react';
 import { useI18n } from '@/i18n/I18nProvider';
 import { ProductRecord, ServiceRecord, pickLocalized } from '@/lib/content-types';
@@ -41,6 +42,10 @@ function resolveImage(value: string | undefined, fallbackIndex: number, fallback
     return value;
   }
   return fallbackSet[fallbackIndex % fallbackSet.length];
+}
+
+function getServiceHref(id: string) {
+  return id.startsWith('fallback-') ? '/contact' : `/services/${id}`;
 }
 
 export default function ProductDetails({ productId }: ProductDetailsProps) {
@@ -285,12 +290,12 @@ export default function ProductDetails({ productId }: ProductDetailsProps) {
                   <h3 className="text-lg font-semibold text-[#004FCE]">{card.title}</h3>
                   <p className="mt-2 text-xs leading-5 text-[#666]">{card.description}</p>
 
-                  <button
-                    type="button"
-                    className="mt-4 h-[31px] rounded-[5px] border border-black/20 bg-white px-4 text-xs text-[#333]"
+                  <Link
+                    href={getServiceHref(card.id)}
+                    className="mt-4 inline-flex h-[31px] items-center rounded-[5px] border border-black/20 bg-white px-4 text-xs text-[#333]"
                   >
                     {t.viewMore}
-                  </button>
+                  </Link>
                 </div>
               </div>
             ))}

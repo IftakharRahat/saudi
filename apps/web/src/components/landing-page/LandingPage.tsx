@@ -50,6 +50,10 @@ function resolveServiceImage(imageUrl: string | undefined, index: number) {
   return SERVICE_FALLBACK_IMAGES[index % SERVICE_FALLBACK_IMAGES.length];
 }
 
+function getServiceHref(id: string) {
+  return id.startsWith('fallback-') ? '/contact' : `/services/${id}`;
+}
+
 export default function LandingPage() {
   const { t, dir, lang } = useI18n();
   const [apiServices, setApiServices] = useState<ServiceRecord[]>([]);
@@ -305,12 +309,12 @@ export default function LandingPage() {
                 <div className="p-5 text-center">
                   <h3 className="text-lg font-semibold text-[#004FCE]">{card.title}</h3>
                   <p className="mt-2 text-xs leading-5 text-[#666]">{card.description}</p>
-                  <button
-                    type="button"
-                    className="mt-4 h-[31px] rounded-[5px] border border-black/20 bg-white px-4 text-xs text-[#333]"
+                  <Link
+                    href={getServiceHref(card.id)}
+                    className="mt-4 inline-flex h-[31px] items-center rounded-[5px] border border-black/20 bg-white px-4 text-xs text-[#333]"
                   >
                     {t.viewMoreBtn}
-                  </button>
+                  </Link>
                 </div>
               </div>
             ))}
