@@ -41,7 +41,7 @@ function resolveServiceImage(imageUrl: string | undefined, index: number) {
 }
 
 function getServiceHref(id: string) {
-  return id.startsWith('fallback-') ? '/contact' : `/services/${id}`;
+  return `/services/${id}`;
 }
 
 export default function ServicesPage() {

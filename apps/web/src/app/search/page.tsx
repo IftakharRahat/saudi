@@ -22,7 +22,7 @@ function createEmptyResults(): SearchResults {
 }
 
 function getServiceHref(id: string) {
-  return id.startsWith('fallback-') ? '/contact' : `/services/${id}`;
+  return `/services/${id}`;
 }
 
 function SearchPageFallback() {

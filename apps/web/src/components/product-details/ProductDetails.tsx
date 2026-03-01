@@ -46,7 +46,20 @@ function resolveImage(value: string | undefined, fallbackIndex: number, fallback
 }
 
 function getServiceHref(id: string) {
-  return id.startsWith('fallback-') ? '/contact' : `/services/${id}`;
+  return `/services/${id}`;
+}
+
+function parseFallbackServiceIndex(id?: string) {
+  if (!id || !id.startsWith('fallback-')) {
+    return null;
+  }
+
+  const index = Number(id.replace('fallback-', '')) - 1;
+  if (Number.isNaN(index) || index < 0 || index > 8) {
+    return null;
+  }
+
+  return index;
 }
 
 export default function ProductDetails({ productId, serviceId }: ProductDetailsProps) {
@@ -56,6 +69,7 @@ export default function ProductDetails({ productId, serviceId }: ProductDetailsP
   const [services, setServices] = useState<ServiceRecord[]>([]);
   const [active, setActive] = useState(0);
   const [notFound, setNotFound] = useState(false);
+  const fallbackServiceIndex = parseFallbackServiceIndex(serviceId);
 
   useEffect(() => {
     let mounted = true;
@@ -71,6 +85,13 @@ export default function ProductDetails({ productId, serviceId }: ProductDetailsP
           }
 
           if (!resolvedService) {
+            if (fallbackServiceIndex !== null) {
+              setService(null);
+              setProduct(null);
+              setNotFound(false);
+              setActive(0);
+              return;
+            }
             setService(null);
             setProduct(null);
             setNotFound(true);
@@ -79,10 +100,18 @@ export default function ProductDetails({ productId, serviceId }: ProductDetailsP
 
           setService(resolvedService);
           setProduct(null);
+          setNotFound(false);
           setActive(0);
           return;
         } catch {
           if (mounted) {
+            if (fallbackServiceIndex !== null) {
+              setService(null);
+              setProduct(null);
+              setNotFound(false);
+              setActive(0);
+              return;
+            }
             setService(null);
             setProduct(null);
             setNotFound(true);
@@ -125,7 +154,7 @@ export default function ProductDetails({ productId, serviceId }: ProductDetailsP
     return () => {
       mounted = false;
     };
-  }, [productId, serviceId]);
+  }, [fallbackServiceIndex, productId, serviceId]);
 
   useEffect(() => {
     let mounted = true;
@@ -152,8 +181,16 @@ export default function ProductDetails({ productId, serviceId }: ProductDetailsP
 
   const images = useMemo(() => {
     if (serviceId) {
-      const primary = resolveImage(service?.imageUrl, 0, SERVICE_IMAGE_FALLBACKS);
-      return [primary, ...SERVICE_IMAGE_FALLBACKS.slice(1, 4)];
+      const baseIndex = fallbackServiceIndex ?? 0;
+      const fallbackSet = Array.from({ length: 4 }, (_, offset) => {
+        return SERVICE_IMAGE_FALLBACKS[(baseIndex + offset) % SERVICE_IMAGE_FALLBACKS.length];
+      });
+
+      if (service?.imageUrl && service.imageUrl.trim().length > 0) {
+        fallbackSet[0] = service.imageUrl;
+      }
+
+      return fallbackSet;
     }
 
     const apiImages = product?.images
@@ -166,7 +203,7 @@ export default function ProductDetails({ productId, serviceId }: ProductDetailsP
     }
 
     return PRODUCT_IMAGE_FALLBACKS;
-  }, [product, service, serviceId]);
+  }, [fallbackServiceIndex, product, service, serviceId]);
 
   const featureList = useMemo(() => {
     if (serviceId) {
@@ -219,13 +256,50 @@ export default function ProductDetails({ productId, serviceId }: ProductDetailsP
     t.otherServiceCardDesc,
   ]);
 
+  const fallbackServiceTitle = useMemo(() => {
+    if (fallbackServiceIndex === null) {
+      return null;
+    }
+
+    const titles = [
+      t.service1,
+      t.service2,
+      t.service3,
+      t.service4,
+      t.service5,
+      t.service6,
+      t.service7,
+      t.service8,
+      t.service9,
+    ];
+
+    return titles[fallbackServiceIndex] ?? null;
+  }, [
+    fallbackServiceIndex,
+    t.service1,
+    t.service2,
+    t.service3,
+    t.service4,
+    t.service5,
+    t.service6,
+    t.service7,
+    t.service8,
+    t.service9,
+  ]);
+
+  const fallbackServiceDescription = fallbackServiceIndex === null ? null : t.servicesCardDesc || t.serviceCardDesc;
+
   const title = service
     ? pickLocalized(lang, service.titleEn, service.titleAr)
+    : fallbackServiceTitle
+      ? fallbackServiceTitle
     : product
       ? pickLocalized(lang, product.titleEn, product.titleAr)
       : t.headline;
   const description = service
     ? pickLocalized(lang, service.descriptionEn, service.descriptionAr)
+    : fallbackServiceDescription
+      ? fallbackServiceDescription
     : product
       ? pickLocalized(lang, product.descriptionEn, product.descriptionAr)
       : t.subtext;
