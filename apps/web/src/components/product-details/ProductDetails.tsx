@@ -5,10 +5,11 @@ import Link from 'next/link';
 import { useEffect, useMemo, useState } from 'react';
 import { useI18n } from '@/i18n/I18nProvider';
 import { ProductRecord, ServiceRecord, pickLocalized } from '@/lib/content-types';
-import { fetchProductById, fetchProducts, fetchServices } from '@/lib/frontend-api';
+import { fetchProductById, fetchProducts, fetchServiceById, fetchServices } from '@/lib/frontend-api';
 
 type ProductDetailsProps = {
   productId?: string;
+  serviceId?: string;
 };
 
 type ServiceCard = {
@@ -48,9 +49,10 @@ function getServiceHref(id: string) {
   return id.startsWith('fallback-') ? '/contact' : `/services/${id}`;
 }
 
-export default function ProductDetails({ productId }: ProductDetailsProps) {
+export default function ProductDetails({ productId, serviceId }: ProductDetailsProps) {
   const { t, dir, lang } = useI18n();
   const [product, setProduct] = useState<ProductRecord | null>(null);
+  const [service, setService] = useState<ServiceRecord | null>(null);
   const [services, setServices] = useState<ServiceRecord[]>([]);
   const [active, setActive] = useState(0);
   const [notFound, setNotFound] = useState(false);
@@ -60,6 +62,36 @@ export default function ProductDetails({ productId }: ProductDetailsProps) {
 
     const load = async () => {
       setNotFound(false);
+
+      if (serviceId) {
+        try {
+          const resolvedService = await fetchServiceById(serviceId);
+          if (!mounted) {
+            return;
+          }
+
+          if (!resolvedService) {
+            setService(null);
+            setProduct(null);
+            setNotFound(true);
+            return;
+          }
+
+          setService(resolvedService);
+          setProduct(null);
+          setActive(0);
+          return;
+        } catch {
+          if (mounted) {
+            setService(null);
+            setProduct(null);
+            setNotFound(true);
+          }
+          return;
+        }
+      }
+
+      setService(null);
 
       try {
         let resolved: ProductRecord | null = null;
@@ -93,7 +125,7 @@ export default function ProductDetails({ productId }: ProductDetailsProps) {
     return () => {
       mounted = false;
     };
-  }, [productId]);
+  }, [productId, serviceId]);
 
   useEffect(() => {
     let mounted = true;
@@ -119,6 +151,11 @@ export default function ProductDetails({ productId }: ProductDetailsProps) {
   }, []);
 
   const images = useMemo(() => {
+    if (serviceId) {
+      const primary = resolveImage(service?.imageUrl, 0, SERVICE_IMAGE_FALLBACKS);
+      return [primary, ...SERVICE_IMAGE_FALLBACKS.slice(1, 4)];
+    }
+
     const apiImages = product?.images
       ?.slice()
       .sort((left, right) => left.sortOrder - right.sortOrder)
@@ -129,18 +166,24 @@ export default function ProductDetails({ productId }: ProductDetailsProps) {
     }
 
     return PRODUCT_IMAGE_FALLBACKS;
-  }, [product]);
+  }, [product, service, serviceId]);
 
   const featureList = useMemo(() => {
+    if (serviceId) {
+      return [t.feature1, t.feature2, t.feature3, t.feature4];
+    }
+
     const apiFeatures = product ? (lang === 'ar' ? product.featuresAr : product.featuresEn) : [];
     if (apiFeatures.length > 0) {
       return apiFeatures;
     }
     return [t.feature1, t.feature2, t.feature3, t.feature4];
-  }, [lang, product, t.feature1, t.feature2, t.feature3, t.feature4]);
+  }, [lang, product, serviceId, t.feature1, t.feature2, t.feature3, t.feature4]);
 
   const otherServices = useMemo<ServiceCard[]>(() => {
-    if (services.length === 0) {
+    const sourceServices = serviceId ? services.filter((item) => item.id !== serviceId) : services;
+
+    if (sourceServices.length === 0) {
       return [
         { id: 'fallback-1', title: t.otherService1, description: t.otherServiceCardDesc, img: SERVICE_IMAGE_FALLBACKS[0] },
         { id: 'fallback-2', title: t.otherService2, description: t.otherServiceCardDesc, img: SERVICE_IMAGE_FALLBACKS[1] },
@@ -154,14 +197,15 @@ export default function ProductDetails({ productId }: ProductDetailsProps) {
       ];
     }
 
-    return services.map((service, index) => ({
-      id: service.id,
-      title: pickLocalized(lang, service.titleEn, service.titleAr),
-      description: pickLocalized(lang, service.descriptionEn, service.descriptionAr),
-      img: resolveImage(service.imageUrl, index, SERVICE_IMAGE_FALLBACKS),
+    return sourceServices.map((item, index) => ({
+      id: item.id,
+      title: pickLocalized(lang, item.titleEn, item.titleAr),
+      description: pickLocalized(lang, item.descriptionEn, item.descriptionAr),
+      img: resolveImage(item.imageUrl, index, SERVICE_IMAGE_FALLBACKS),
     }));
   }, [
     lang,
+    serviceId,
     services,
     t.otherService1,
     t.otherService2,
@@ -175,8 +219,16 @@ export default function ProductDetails({ productId }: ProductDetailsProps) {
     t.otherServiceCardDesc,
   ]);
 
-  const title = product ? pickLocalized(lang, product.titleEn, product.titleAr) : t.headline;
-  const description = product ? pickLocalized(lang, product.descriptionEn, product.descriptionAr) : t.subtext;
+  const title = service
+    ? pickLocalized(lang, service.titleEn, service.titleAr)
+    : product
+      ? pickLocalized(lang, product.titleEn, product.titleAr)
+      : t.headline;
+  const description = service
+    ? pickLocalized(lang, service.descriptionEn, service.descriptionAr)
+    : product
+      ? pickLocalized(lang, product.descriptionEn, product.descriptionAr)
+      : t.subtext;
   const activeIndex = active % images.length;
 
   const prev = () => setActive((previous) => (previous - 1 + images.length) % images.length);
@@ -187,7 +239,7 @@ export default function ProductDetails({ productId }: ProductDetailsProps) {
       <section className="mx-auto w-full max-w-[1680px] px-4 pb-20 pt-15 lg:px-[120px]">
         {notFound && (
           <div className="mb-6 rounded-[6px] border border-red-200 bg-red-50 p-4 text-sm text-red-700">
-            Product not found.
+            {serviceId ? 'Service not found.' : 'Product not found.'}
           </div>
         )}
 

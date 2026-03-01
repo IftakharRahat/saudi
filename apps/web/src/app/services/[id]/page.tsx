@@ -1,4 +1,4 @@
-import ServiceDetails from '@/components/services/ServiceDetails';
+import ProductDetails from '@/components/product-details/ProductDetails';
 
 type ServiceDetailsRouteProps = {
   params: Promise<{ id: string }>;
@@ -6,5 +6,5 @@ type ServiceDetailsRouteProps = {
 
 export default async function ServiceDetailsPage({ params }: ServiceDetailsRouteProps) {
   const { id } = await params;
-  return <ServiceDetails serviceId={id} />;
+  return <ProductDetails serviceId={id} />;
 }
