@@ -29,7 +29,7 @@ type Dict = {
   otherServicesSub: string;
   viewMore: string;
 
-    heroBadge: string;
+  heroBadge: string;
   heroTitleTop: string;
   heroTitleBlue: string;
   heroTitleRest: string;
@@ -88,28 +88,28 @@ type Dict = {
   servicesPremiumSubtitle: string;
   servicesCardDesc: string;
   service1: string;
-service2: string;
-service3: string;
-service4: string;
-service5: string;
-service6: string;
-service7: string;
-service8: string;
-service9: string;
-otherService1: string;
-otherService2: string;
-otherService3: string;
-otherService4: string;
-otherService5: string;
-otherService6: string;
-otherService7: string;
-otherService8: string;
-otherService9: string;
+  service2: string;
+  service3: string;
+  service4: string;
+  service5: string;
+  service6: string;
+  service7: string;
+  service8: string;
+  service9: string;
+  otherService1: string;
+  otherService2: string;
+  otherService3: string;
+  otherService4: string;
+  otherService5: string;
+  otherService6: string;
+  otherService7: string;
+  otherService8: string;
+  otherService9: string;
 
-otherServiceCardDesc: string;
-serviceCardDesc: string;
-viewMoreBtn: string;
-testimonialRole: string;
+  otherServiceCardDesc: string;
+  serviceCardDesc: string;
+  viewMoreBtn: string;
+  testimonialRole: string;
   deliveryTitle: string;
   deliverySubtitle: string;
 
@@ -122,54 +122,54 @@ testimonialRole: string;
 
 
   contactTitle: string;
-contactSubtitle: string;
+  contactSubtitle: string;
 
-contactBoxTitle: string;
-contactBoxSubtitle: string;
-contactPhoneNumberLabel: string;
-contactPhoneNumberValue: string;
-contactEmailLabel: string;
-contactEmailValue: string;
-contactLocationLabel: string;
-contactLocationValue: string;
+  contactBoxTitle: string;
+  contactBoxSubtitle: string;
+  contactPhoneNumberLabel: string;
+  contactPhoneNumberValue: string;
+  contactEmailLabel: string;
+  contactEmailValue: string;
+  contactLocationLabel: string;
+  contactLocationValue: string;
 
-contactFormTitle: string;
-contactFormSubtitle: string;
-contactFullName: string;
-contactMessageLabel: string;
-contactSendButton: string;
+  contactFormTitle: string;
+  contactFormSubtitle: string;
+  contactFullName: string;
+  contactMessageLabel: string;
+  contactSendButton: string;
 
-aboutHeroPill: string;
-aboutHeroTitleLine1: string;
-aboutHeroTitleLine2a: string;
-aboutHeroCity: string;
-aboutHeroTitleLine2b: string;
-aboutHeroSubtitle: string;
+  aboutHeroPill: string;
+  aboutHeroTitleLine1: string;
+  aboutHeroTitleLine2a: string;
+  aboutHeroCity: string;
+  aboutHeroTitleLine2b: string;
+  aboutHeroSubtitle: string;
 
-aboutTag: string;
-aboutSection2Title: string;
-aboutSection2Body: string;
+  aboutTag: string;
+  aboutSection2Title: string;
+  aboutSection2Body: string;
 
-aboutFeature1Title: string;
-aboutFeature1Desc: string;
-aboutFeature2Title: string;
-aboutFeature2Desc: string;
-aboutFeature3Title: string;
-aboutFeature3Desc: string;
+  aboutFeature1Title: string;
+  aboutFeature1Desc: string;
+  aboutFeature2Title: string;
+  aboutFeature2Desc: string;
+  aboutFeature3Title: string;
+  aboutFeature3Desc: string;
 
-aboutProcessPill: string;
-aboutProcessTitle: string;
-aboutProcessSubtitle: string;
+  aboutProcessPill: string;
+  aboutProcessTitle: string;
+  aboutProcessSubtitle: string;
 
-aboutStep1Title: string; aboutStep1Desc: string;
-aboutStep2Title: string; aboutStep2Desc: string;
-aboutStep3Title: string; aboutStep3Desc: string;
-aboutStep4Title: string; aboutStep4Desc: string;
-aboutStep5Title: string; aboutStep5Desc: string;
+  aboutStep1Title: string; aboutStep1Desc: string;
+  aboutStep2Title: string; aboutStep2Desc: string;
+  aboutStep3Title: string; aboutStep3Desc: string;
+  aboutStep4Title: string; aboutStep4Desc: string;
+  aboutStep5Title: string; aboutStep5Desc: string;
 
-aboutCtaTitle: string;
-aboutCtaSubtitle: string;
-aboutCtaButton2: string;
+  aboutCtaTitle: string;
+  aboutCtaSubtitle: string;
+  aboutCtaButton2: string;
 
   readySellTitle: string;
   readySellDesc: string;
@@ -182,11 +182,11 @@ aboutCtaButton2: string;
   footerSubscribe: string;
   copyright: string;
   footerDescription: string;
-footerSupport1: string;
-footerSupport2: string;
-footerSupport3: string;
-footerSupport4: string;
-footerBottomCopyright: string;
+  footerSupport1: string;
+  footerSupport2: string;
+  footerSupport3: string;
+  footerSupport4: string;
+  footerBottomCopyright: string;
 };
 
 const DICT: Record<Lang, Dict> = {
@@ -216,10 +216,10 @@ const DICT: Record<Lang, Dict> = {
     otherServicesSub:
       'Looking to sell your used furniture or home appliances? We offer the best prices in Dammam and all surrounding areas — fast, easy, and reliable.',
     viewMore: 'View More',
-        heroBadge: 'We Buy Used Furniture Finds At Home',
+    heroBadge: 'We Buy Used Furniture Finds At Home',
     heroTitleTop: '',
-heroTitleBlue: 'We Buy Used Furniture in',
-heroTitleRest: ' Dammam, Khobar, Qatif & Jubail',
+    heroTitleBlue: 'We Buy Used Furniture in',
+    heroTitleRest: ' Dammam, Khobar, Qatif & Jubail',
     heroSubtitle:
       'Get the Best Prices on Home Appliances, Air Conditioners, and Pre-Loved Furniture! We Buy All Types Across.',
     contactUsCta: 'Contact us',
@@ -285,143 +285,143 @@ heroTitleRest: ' Dammam, Khobar, Qatif & Jubail',
     readySellTitle: 'Ready to Sell? Contact Us Now and Get Instant Payment!',
     readySellDesc:
       "Don't let your old furniture and appliances take up space! We buy used furniture, air conditioners, washing machines, and all household appliances at the best price. Contact us today and turn your old items into cash!",
-    
+
     servicesHeroTitle1: 'Used Furniture Buying',
-  servicesHeroTitle2a: 'Services in ',
-  servicesHeroCity: 'Jubail',
-  servicesHeroTitle2b: ' at the Best Prices',
-  servicesHeroSubtitle:
-    'We offer comprehensive services for buying used furniture, electrical appliances, and air conditioners in Jubail and the Eastern Province. Free transportation & immediate appraisal.',
+    servicesHeroTitle2a: 'Services in ',
+    servicesHeroCity: 'Jubail',
+    servicesHeroTitle2b: ' at the Best Prices',
+    servicesHeroSubtitle:
+      'We offer comprehensive services for buying used furniture, electrical appliances, and air conditioners in Jubail and the Eastern Province. Free transportation & immediate appraisal.',
 
-  servicesPremiumTitle: 'Premium Services',
-  servicesPremiumSubtitle:
-    'Looking to sell your used furniture or home appliances? We offer the best prices in Dammam and all surrounding areas — fast, easy, and reliable.',
-  servicesCardDesc: 'Buy used items in Dammam at the best prices',
+    servicesPremiumTitle: 'Premium Services',
+    servicesPremiumSubtitle:
+      'Looking to sell your used furniture or home appliances? We offer the best prices in Dammam and all surrounding areas — fast, easy, and reliable.',
+    servicesCardDesc: 'Buy used items in Dammam at the best prices',
 
-service1: 'Washing Machine',
-service2: 'Furniture Moving',
-service3: 'Dining Rooms',
-service4: 'Kitchens',
-service5: 'Air Coolers',
-service6: 'All Types of Scraps',
-service7: 'Scrap',
-service8: 'Refrigerators',
-service9: 'Window Air Conditioner',
-otherService1: 'Central Air Conditioning',
-otherService2: 'Furniture Moving',
-otherService3: 'Dining Rooms',
-otherService4: 'Kitchens',
-otherService5: 'Air Coolers',
-otherService6: 'All Types of Scraps',
-otherService7: 'Scrap',
-otherService8: 'Refrigerators',
-otherService9: 'Window Air Conditioner',
+    service1: 'Washing Machine',
+    service2: 'Furniture Moving',
+    service3: 'Dining Rooms',
+    service4: 'Kitchens',
+    service5: 'Air Coolers',
+    service6: 'All Types of Scraps',
+    service7: 'Scrap',
+    service8: 'Refrigerators',
+    service9: 'Window Air Conditioner',
+    otherService1: 'Central Air Conditioning',
+    otherService2: 'Furniture Moving',
+    otherService3: 'Dining Rooms',
+    otherService4: 'Kitchens',
+    otherService5: 'Air Coolers',
+    otherService6: 'All Types of Scraps',
+    otherService7: 'Scrap',
+    otherService8: 'Refrigerators',
+    otherService9: 'Window Air Conditioner',
 
-otherServiceCardDesc:
-  'Buy used central air conditioners in Dammam at the best prices',
-serviceCardDesc: 'Buy used items in Dammam at the best prices',
-viewMoreBtn: 'View More',
-testimonialRole: 'Customer',
-  deliveryTitle: 'Service Delivery Area',
-  deliverySubtitle:
-  'We cover all cities and governorates in the Eastern Province for buying used furniture and household appliances.',
+    otherServiceCardDesc:
+      'Buy used central air conditioners in Dammam at the best prices',
+    serviceCardDesc: 'Buy used items in Dammam at the best prices',
+    viewMoreBtn: 'View More',
+    testimonialRole: 'Customer',
+    deliveryTitle: 'Service Delivery Area',
+    deliverySubtitle:
+      'We cover all cities and governorates in the Eastern Province for buying used furniture and household appliances.',
 
-  area1City: 'AL-KHOBAR',
-  area1Title: 'Buying Used Furniture in Al Khobar',
-  area1Desc: 'Best price for furniture, appliances & AC units across all Al-Khobar district',
+    area1City: 'AL-KHOBAR',
+    area1Title: 'Buying Used Furniture in Al Khobar',
+    area1Desc: 'Best price for furniture, appliances & AC units across all Al-Khobar district',
 
-  area2City: 'DAMMAM',
-  area2Title: 'Buying Used Furniture in Dammam',
-  area2Desc: 'Some-day home visits and immediate appraisals throughout Dammam',
+    area2City: 'DAMMAM',
+    area2Title: 'Buying Used Furniture in Dammam',
+    area2Desc: 'Some-day home visits and immediate appraisals throughout Dammam',
 
-  area3City: 'JUBAIL',
-  area3Title: 'Buying Used Furniture in Jubail',
-  area3Desc: 'Our primary hub—fast, reliable, and the best prices in Jubail guaranteed.',
+    area3City: 'JUBAIL',
+    area3Title: 'Buying Used Furniture in Jubail',
+    area3Desc: 'Our primary hub—fast, reliable, and the best prices in Jubail guaranteed.',
 
-  area4City: 'DHAHRAN & SAIHAT',
-  area4Title: 'Buying Used Furniture in Dhahran and Saihat',
-  area4Desc: 'Full service coverage in Dhahran and Saihat with free transportation included',
+    area4City: 'DHAHRAN & SAIHAT',
+    area4Title: 'Buying Used Furniture in Dhahran and Saihat',
+    area4Desc: 'Full service coverage in Dhahran and Saihat with free transportation included',
 
-  area5City: 'AL AHSA',
-  area5Title: 'Buying Used Furniture in Al-Ahsa',
-  area5Desc: 'Transparent pricing and professional assessment services across Al-Ahsa',
+    area5City: 'AL AHSA',
+    area5Title: 'Buying Used Furniture in Al-Ahsa',
+    area5Desc: 'Transparent pricing and professional assessment services across Al-Ahsa',
 
-  area6City: 'QATIF',
-  area6Title: 'Buying Used Furniture in Qatif',
-  area6Desc: 'Competitive offers and dedicated team visits in Qatif and surrounding areas.',
-  contactTitle: 'Contact Us',
-contactSubtitle:
-  'Selling your old furniture or appliances has never been easier. Contact us today and get the best price — fast and hassle-free.',
+    area6City: 'QATIF',
+    area6Title: 'Buying Used Furniture in Qatif',
+    area6Desc: 'Competitive offers and dedicated team visits in Qatif and surrounding areas.',
+    contactTitle: 'Contact Us',
+    contactSubtitle:
+      'Selling your old furniture or appliances has never been easier. Contact us today and get the best price — fast and hassle-free.',
 
-contactBoxTitle: 'Contact Us',
-contactBoxSubtitle: 'You can call us directly via',
+    contactBoxTitle: 'Contact Us',
+    contactBoxSubtitle: 'You can call us directly via',
 
-contactPhoneNumberLabel: 'Phone Number',
-contactPhoneNumberValue: '+000 (123) 456 889',
+    contactPhoneNumberLabel: 'Phone Number',
+    contactPhoneNumberValue: '+000 (123) 456 889',
 
-contactEmailLabel: 'E-mail Address',
-contactEmailValue: 'support@gmail.com',
+    contactEmailLabel: 'E-mail Address',
+    contactEmailValue: 'support@gmail.com',
 
-contactLocationLabel: 'Location',
-contactLocationValue: '55 Main Street, Melbourne, Australia',
+    contactLocationLabel: 'Location',
+    contactLocationValue: '55 Main Street, Melbourne, Australia',
 
-contactFormTitle: 'Send us a message',
-contactFormSubtitle: 'Please fill out the form below and we will get back to you as soon as possible',
+    contactFormTitle: 'Send us a message',
+    contactFormSubtitle: 'Please fill out the form below and we will get back to you as soon as possible',
 
-contactFullName: 'Full Name',
-contactMessageLabel: 'Message',
-contactSendButton: 'Send Message', 
-  
-aboutHeroPill: 'Who are we?',
-aboutHeroTitleLine1: 'Used Furniture Buying',
-aboutHeroTitleLine2a: 'Services in ',
-aboutHeroCity: 'Al-Khobar',
-aboutHeroTitleLine2b: ' at the Best Prices',
-aboutHeroSubtitle:
-  'We are a leading company in buying used air conditioners, scrap, and metals — with immediate payment, free pickup from your location, and over 10 years of experience.',
+    contactFullName: 'Full Name',
+    contactMessageLabel: 'Message',
+    contactSendButton: 'Send Message',
 
-aboutTag: 'About Us',
-aboutSection2Title: 'Who Are We?',
-aboutSection2Body:
-  'We are a leading company in buying used air conditioners in Al-Khobar and throughout the Eastern Province. We have over 10 years of experience purchasing used air conditioners, scrap air conditioners, and metals at the highest prices.\n\nWith immediate payment and free pickup directly from your location, our specialized team will reach you quickly to assess your air conditioners and scrap metal with complete transparency. You can view our used air conditioner buying services for more details.\n\nWe are also the first destination for buying used furniture in Dammam, including bedrooms, dining rooms, sofas, and wardrobes, at attractive prices and with immediate cash payment.',
+    aboutHeroPill: 'Who are we?',
+    aboutHeroTitleLine1: 'Used Furniture Buying',
+    aboutHeroTitleLine2a: 'Services in ',
+    aboutHeroCity: 'Al-Khobar',
+    aboutHeroTitleLine2b: ' at the Best Prices',
+    aboutHeroSubtitle:
+      'We are a leading company in buying used air conditioners, scrap, and metals — with immediate payment, free pickup from your location, and over 10 years of experience.',
 
-aboutFeature1Title: 'Market Leader',
-aboutFeature1Desc:
-  "Whether you're in Al Khobar, Dammam, Qatif, or Al Ahsa, our specialized team reaches you quickly for a transparent, on-site assessment.",
-aboutFeature2Title: 'Immediate Cash Payment',
-aboutFeature2Desc:
-  'We hand over cash the moment we agree on the price — no delays, no bank transfers, no waiting.',
-aboutFeature3Title: 'Free Pickup Service',
-aboutFeature3Desc:
-  'Our team handles all transportation at zero cost to you. We come to your door, assess the items, and carry them away.',
+    aboutTag: 'About Us',
+    aboutSection2Title: 'Who Are We?',
+    aboutSection2Body:
+      'We are a leading company in buying used air conditioners in Al-Khobar and throughout the Eastern Province. We have over 10 years of experience purchasing used air conditioners, scrap air conditioners, and metals at the highest prices.\n\nWith immediate payment and free pickup directly from your location, our specialized team will reach you quickly to assess your air conditioners and scrap metal with complete transparency. You can view our used air conditioner buying services for more details.\n\nWe are also the first destination for buying used furniture in Dammam, including bedrooms, dining rooms, sofas, and wardrobes, at attractive prices and with immediate cash payment.',
 
-aboutProcessPill: 'Simple Process',
-aboutProcessTitle: 'How Do You Sell Your Used Furniture \nor Scrap with Us?',
-aboutProcessSubtitle:
-  'Selling your used furniture or scrap with us is simple and hassle-free. Just share the details of your items, get a quick price estimate, and schedule a pickup at your convenience. Our team ensures a smooth process from start to finish, saving you time while offering the best value for your items.',
+    aboutFeature1Title: 'Market Leader',
+    aboutFeature1Desc:
+      "Whether you're in Al Khobar, Dammam, Qatif, or Al Ahsa, our specialized team reaches you quickly for a transparent, on-site assessment.",
+    aboutFeature2Title: 'Immediate Cash Payment',
+    aboutFeature2Desc:
+      'We hand over cash the moment we agree on the price — no delays, no bank transfers, no waiting.',
+    aboutFeature3Title: 'Free Pickup Service',
+    aboutFeature3Desc:
+      'Our team handles all transportation at zero cost to you. We come to your door, assess the items, and carry them away.',
 
-aboutStep1Title: 'Contact Us',
-aboutStep1Desc:
-  'Reach us via phone or WhatsApp to provide initial information about the your used furniture or scrap you want to sell.',
-aboutStep2Title: 'Schedule an Appointment',
-aboutStep2Desc:
-  'We will schedule a convenient time for the visit in Al Khobar or your area — same-day visits often available.',
-aboutStep3Title: 'On-Site Inspection',
-aboutStep3Desc:
-  'Our team evaluates the devices or metals accurately and transparently, right at your location.',
-aboutStep4Title: 'Price Offer',
-aboutStep4Desc:
-  'We offer the best market price with immediate payment.',
-aboutStep5Title: 'Transport',
-aboutStep5Desc:
-  'We ensure transparent service by transporting your used furniture or scrap from your location.',
+    aboutProcessPill: 'Simple Process',
+    aboutProcessTitle: 'How Do You Sell Your Used Furniture \nor Scrap with Us?',
+    aboutProcessSubtitle:
+      'Selling your used furniture or scrap with us is simple and hassle-free. Just share the details of your items, get a quick price estimate, and schedule a pickup at your convenience. Our team ensures a smooth process from start to finish, saving you time while offering the best value for your items.',
 
-aboutCtaTitle: 'Ready to Sell? We Come to You.',
-aboutCtaSubtitle:
-  'Call us now for a same-day visit, honest appraisal, and immediate cash payment — anywhere in Al-Khobar or any other place.',
-aboutCtaButton2: 'Our Services',
+    aboutStep1Title: 'Contact Us',
+    aboutStep1Desc:
+      'Reach us via phone or WhatsApp to provide initial information about the your used furniture or scrap you want to sell.',
+    aboutStep2Title: 'Schedule an Appointment',
+    aboutStep2Desc:
+      'We will schedule a convenient time for the visit in Al Khobar or your area — same-day visits often available.',
+    aboutStep3Title: 'On-Site Inspection',
+    aboutStep3Desc:
+      'Our team evaluates the devices or metals accurately and transparently, right at your location.',
+    aboutStep4Title: 'Price Offer',
+    aboutStep4Desc:
+      'We offer the best market price with immediate payment.',
+    aboutStep5Title: 'Transport',
+    aboutStep5Desc:
+      'We ensure transparent service by transporting your used furniture or scrap from your location.',
 
-  footerAboutTitle: 'About Us',
+    aboutCtaTitle: 'Ready to Sell? We Come to You.',
+    aboutCtaSubtitle:
+      'Call us now for a same-day visit, honest appraisal, and immediate cash payment — anywhere in Al-Khobar or any other place.',
+    aboutCtaButton2: 'Our Services',
+
+    footerAboutTitle: 'About Us',
     footerSupportTitle: 'Support And Education',
     footerContactTitle: 'Contact Us',
     footerSubscribeTitle: 'Subscribe To Our Newsletter',
@@ -429,15 +429,15 @@ aboutCtaButton2: 'Our Services',
     footerAgree: 'I Agree To My Email Being Stored Receive',
     footerSubscribe: 'Subscribe',
     footerDescription:
-  'We specialize in buying used furniture, electrical appliances, and scrap metal across Dammam.',
+      'We specialize in buying used furniture, electrical appliances, and scrap metal across Dammam.',
 
-footerSupport1: 'Buying Used Air Conditioners',
-footerSupport2: 'Buying Refrigerators and Washing Machines',
-footerSupport3: 'Buying Sofas and Living Room Sets',
-footerSupport4: 'Buying Scrap Metal and Iron',
+    footerSupport1: 'Buying Used Air Conditioners',
+    footerSupport2: 'Buying Refrigerators and Washing Machines',
+    footerSupport3: 'Buying Sofas and Living Room Sets',
+    footerSupport4: 'Buying Scrap Metal and Iron',
 
-footerBottomCopyright:
-  'Copyright © 2023. All Rights Reserved.',
+    footerBottomCopyright:
+      'Copyright © 2023. All Rights Reserved.',
     copyright: '© 2026 Buying Used Furniture In Dammam. All Rights Reserved.',
   },
   ar: {
@@ -466,10 +466,10 @@ footerBottomCopyright:
     otherServicesSub:
       'هل ترغب في بيع أثاثك أو أجهزة منزلك المستعملة؟ نقدم أفضل الأسعار في الدمام والمناطق المحيطة — بسرعة وسهولة وموثوقية.',
     viewMore: 'عرض المزيد',
-        heroBadge: 'نشتري الأثاث المستعمل بسهولة',
+    heroBadge: 'نشتري الأثاث المستعمل بسهولة',
     heroTitleTop: '',
-heroTitleBlue: 'نشتري الأثاث المستعمل في',
-heroTitleRest: ' الدمام، الخبر، القطيف والجبيل',
+    heroTitleBlue: 'نشتري الأثاث المستعمل في',
+    heroTitleRest: ' الدمام، الخبر، القطيف والجبيل',
     heroSubtitle:
       'احصل على أفضل الأسعار للأجهزة المنزلية والمكيفات والأثاث المستعمل. نشتري جميع الأنواع.',
     contactUsCta: 'تواصل معنا',
@@ -523,141 +523,141 @@ heroTitleRest: ' الدمام، الخبر، القطيف والجبيل',
     readySellTitle: 'جاهز للبيع؟ تواصل معنا الآن واحصل على دفع فوري!',
     readySellDesc:
       'لا تدع الأثاث والأجهزة القديمة تشغل مساحة! نشتري الأثاث والمكيفات والغسالات وكل الأجهزة بأفضل سعر.',
-    
+
     servicesHeroTitle1: 'شراء الأثاث المستعمل',
     servicesHeroTitle2a: 'خدماتنا في ',
     servicesHeroCity: 'الجبيل',
     servicesHeroTitle2b: ' بأفضل الأسعار',
     servicesHeroSubtitle:
-  'نقدم خدمات شاملة لشراء الأثاث المستعمل والأجهزة الكهربائية والمكيفات في الجبيل والمنطقة الشرقية. نقل مجاني وتقييم فوري.',
+      'نقدم خدمات شاملة لشراء الأثاث المستعمل والأجهزة الكهربائية والمكيفات في الجبيل والمنطقة الشرقية. نقل مجاني وتقييم فوري.',
 
-  servicesPremiumTitle: 'خدمات مميزة',
-  servicesPremiumSubtitle:
-    'هل تريد بيع أثاثك أو أجهزة منزلك المستعملة؟ نقدم أفضل الأسعار في الدمام والمناطق المحيطة — بسرعة وسهولة وموثوقية.',
-  servicesCardDesc: 'نشتري المستعمل في الدمام بأفضل الأسعار',
-service1: 'غسالات',
-service2: 'نقل الأثاث',
-service3: 'غرف الطعام',
-service4: 'مطابخ',
-service5: 'مكيفات صحراوية',
-service6: 'جميع أنواع الخردة',
-service7: 'خردة',
-service8: 'ثلاجات',
-service9: 'مكيف شباك',
-otherService1: 'تكييف مركزي',
-otherService2: 'نقل الأثاث',
-otherService3: 'غرف الطعام',
-otherService4: 'مطابخ',
-otherService5: 'مكيفات صحراوية',
-otherService6: 'جميع أنواع الخردة',
-otherService7: 'خردة',
-otherService8: 'ثلاجات',
-otherService9: 'مكيف شباك',
+    servicesPremiumTitle: 'خدمات مميزة',
+    servicesPremiumSubtitle:
+      'هل تريد بيع أثاثك أو أجهزة منزلك المستعملة؟ نقدم أفضل الأسعار في الدمام والمناطق المحيطة — بسرعة وسهولة وموثوقية.',
+    servicesCardDesc: 'نشتري المستعمل في الدمام بأفضل الأسعار',
+    service1: 'غسالات',
+    service2: 'نقل الأثاث',
+    service3: 'غرف الطعام',
+    service4: 'مطابخ',
+    service5: 'مكيفات صحراوية',
+    service6: 'جميع أنواع الخردة',
+    service7: 'خردة',
+    service8: 'ثلاجات',
+    service9: 'مكيف شباك',
+    otherService1: 'تكييف مركزي',
+    otherService2: 'نقل الأثاث',
+    otherService3: 'غرف الطعام',
+    otherService4: 'مطابخ',
+    otherService5: 'مكيفات صحراوية',
+    otherService6: 'جميع أنواع الخردة',
+    otherService7: 'خردة',
+    otherService8: 'ثلاجات',
+    otherService9: 'مكيف شباك',
 
-otherServiceCardDesc:
-  'نشتري التكييف المركزي المستعمل في الدمام بأفضل الأسعار',
-serviceCardDesc: 'نشتري المستعمل في الدمام بأفضل الأسعار',
-viewMoreBtn: 'عرض المزيد',
-testimonialRole: 'عميل',
-  deliveryTitle: 'مناطق تقديم الخدمة',
-  deliverySubtitle:
-    'نغطي جميع المدن والمحافظات في المنطقة الشرقية لشراء الأثاث المستعمل والأجهزة المنزلية.',
+    otherServiceCardDesc:
+      'نشتري التكييف المركزي المستعمل في الدمام بأفضل الأسعار',
+    serviceCardDesc: 'نشتري المستعمل في الدمام بأفضل الأسعار',
+    viewMoreBtn: 'عرض المزيد',
+    testimonialRole: 'عميل',
+    deliveryTitle: 'مناطق تقديم الخدمة',
+    deliverySubtitle:
+      'نغطي جميع المدن والمحافظات في المنطقة الشرقية لشراء الأثاث المستعمل والأجهزة المنزلية.',
 
-  area1City: 'الخبر',
-  area1Title: 'شراء الأثاث المستعمل في الخبر',
-  area1Desc: 'أفضل سعر للأثاث والأجهزة والمكيفات في جميع أحياء الخبر',
+    area1City: 'الخبر',
+    area1Title: 'شراء الأثاث المستعمل في الخبر',
+    area1Desc: 'أفضل سعر للأثاث والأجهزة والمكيفات في جميع أحياء الخبر',
 
-  area2City: 'الدمام',
-  area2Title: 'شراء الأثاث المستعمل في الدمام',
-  area2Desc: 'زيارات منزلية وتقييم فوري في أنحاء الدمام',
+    area2City: 'الدمام',
+    area2Title: 'شراء الأثاث المستعمل في الدمام',
+    area2Desc: 'زيارات منزلية وتقييم فوري في أنحاء الدمام',
 
-  area3City: 'الجبيل',
-  area3Title: 'شراء الأثاث المستعمل في الجبيل',
-  area3Desc: 'مركزنا الرئيسي — خدمة سريعة وأسعار مضمونة في الجبيل',
+    area3City: 'الجبيل',
+    area3Title: 'شراء الأثاث المستعمل في الجبيل',
+    area3Desc: 'مركزنا الرئيسي — خدمة سريعة وأسعار مضمونة في الجبيل',
 
-  area4City: 'الظهران وسيهات',
-  area4Title: 'شراء الأثاث المستعمل في الظهران وسيهات',
-  area4Desc: 'تغطية كاملة مع نقل مجاني في الظهران وسيهات',
+    area4City: 'الظهران وسيهات',
+    area4Title: 'شراء الأثاث المستعمل في الظهران وسيهات',
+    area4Desc: 'تغطية كاملة مع نقل مجاني في الظهران وسيهات',
 
-  area5City: 'الأحساء',
-  area5Title: 'شراء الأثاث المستعمل في الأحساء',
-  area5Desc: 'تسعير واضح وتقييم احترافي في أنحاء الأحساء',
+    area5City: 'الأحساء',
+    area5Title: 'شراء الأثاث المستعمل في الأحساء',
+    area5Desc: 'تسعير واضح وتقييم احترافي في أنحاء الأحساء',
 
-  area6City: 'القطيف',
-  area6Title: 'شراء الأثاث المستعمل في القطيف',
-  area6Desc: 'عروض منافسة وزيارات فريقنا للقطيف والمناطق المجاورة',
+    area6City: 'القطيف',
+    area6Title: 'شراء الأثاث المستعمل في القطيف',
+    area6Desc: 'عروض منافسة وزيارات فريقنا للقطيف والمناطق المجاورة',
 
-  contactTitle: 'تواصل معنا',
-contactSubtitle:
-  'لم يكن بيع أثاثك أو أجهزتك المستعملة أسهل من قبل. تواصل معنا اليوم واحصل على أفضل سعر — بسرعة وبدون أي متاعب.',
+    contactTitle: 'تواصل معنا',
+    contactSubtitle:
+      'لم يكن بيع أثاثك أو أجهزتك المستعملة أسهل من قبل. تواصل معنا اليوم واحصل على أفضل سعر — بسرعة وبدون أي متاعب.',
 
-contactBoxTitle: 'تواصل معنا',
-contactBoxSubtitle: 'يمكنك التواصل معنا مباشرة عبر',
+    contactBoxTitle: 'تواصل معنا',
+    contactBoxSubtitle: 'يمكنك التواصل معنا مباشرة عبر',
 
-contactPhoneNumberLabel: 'رقم الهاتف',
-contactPhoneNumberValue: '+000 (123) 456 889',
+    contactPhoneNumberLabel: 'رقم الهاتف',
+    contactPhoneNumberValue: '+000 (123) 456 889',
 
-contactEmailLabel: 'البريد الإلكتروني',
-contactEmailValue: 'support@gmail.com',
+    contactEmailLabel: 'البريد الإلكتروني',
+    contactEmailValue: 'support@gmail.com',
 
-contactLocationLabel: 'الموقع',
-contactLocationValue: '55 Main Street, Melbourne, Australia',
+    contactLocationLabel: 'الموقع',
+    contactLocationValue: '55 Main Street, Melbourne, Australia',
 
-contactFormTitle: 'أرسل لنا رسالة',
-contactFormSubtitle: 'يرجى تعبئة النموذج أدناه وسنعاود التواصل معك في أقرب وقت ممكن',
+    contactFormTitle: 'أرسل لنا رسالة',
+    contactFormSubtitle: 'يرجى تعبئة النموذج أدناه وسنعاود التواصل معك في أقرب وقت ممكن',
 
-contactFullName: 'الاسم الكامل',
-contactMessageLabel: 'الرسالة',
-contactSendButton: 'إرسال الرسالة',
+    contactFullName: 'الاسم الكامل',
+    contactMessageLabel: 'الرسالة',
+    contactSendButton: 'إرسال الرسالة',
 
-aboutHeroPill: 'من نحن؟',
-aboutHeroTitleLine1: 'شراء الأثاث المستعمل',
-aboutHeroTitleLine2a: 'خدماتنا في ',
-aboutHeroCity: 'الخبر',
-aboutHeroTitleLine2b: ' بأفضل الأسعار',
-aboutHeroSubtitle:
-  'نحن شركة رائدة في شراء المكيفات المستعملة والخردة والمعادن — مع دفع فوري، ونقل مجاني من موقعك، وخبرة تزيد عن 10 سنوات.',
+    aboutHeroPill: 'من نحن؟',
+    aboutHeroTitleLine1: 'شراء الأثاث المستعمل',
+    aboutHeroTitleLine2a: 'خدماتنا في ',
+    aboutHeroCity: 'الخبر',
+    aboutHeroTitleLine2b: ' بأفضل الأسعار',
+    aboutHeroSubtitle:
+      'نحن شركة رائدة في شراء المكيفات المستعملة والخردة والمعادن — مع دفع فوري، ونقل مجاني من موقعك، وخبرة تزيد عن 10 سنوات.',
 
-aboutTag: 'من نحن',
-aboutSection2Title: 'من نحن؟',
-aboutSection2Body:
-  'نحن شركة رائدة في شراء المكيفات المستعملة في الخبر وجميع أنحاء المنطقة الشرقية. لدينا أكثر من 10 سنوات من الخبرة في شراء المكيفات المستعملة وخردة المكيفات والمعادن بأعلى الأسعار.\n\nمع الدفع الفوري والنقل المجاني مباشرة من موقعك، يصل إليك فريقنا المتخصص بسرعة لتقييم المكيفات والخردة بكل شفافية. يمكنك الاطلاع على خدمات شراء المكيفات لدينا لمزيد من التفاصيل.\n\nكما أننا الوجهة الأولى لشراء الأثاث المستعمل في الدمام، بما في ذلك غرف النوم وغرف الطعام والأرائك والخزائن، بأسعار مناسبة ودفع نقدي فوري.',
+    aboutTag: 'من نحن',
+    aboutSection2Title: 'من نحن؟',
+    aboutSection2Body:
+      'نحن شركة رائدة في شراء المكيفات المستعملة في الخبر وجميع أنحاء المنطقة الشرقية. لدينا أكثر من 10 سنوات من الخبرة في شراء المكيفات المستعملة وخردة المكيفات والمعادن بأعلى الأسعار.\n\nمع الدفع الفوري والنقل المجاني مباشرة من موقعك، يصل إليك فريقنا المتخصص بسرعة لتقييم المكيفات والخردة بكل شفافية. يمكنك الاطلاع على خدمات شراء المكيفات لدينا لمزيد من التفاصيل.\n\nكما أننا الوجهة الأولى لشراء الأثاث المستعمل في الدمام، بما في ذلك غرف النوم وغرف الطعام والأرائك والخزائن، بأسعار مناسبة ودفع نقدي فوري.',
 
-aboutFeature1Title: 'الريادة في السوق',
-aboutFeature1Desc:
-  'سواء كنت في الخبر أو الدمام أو القطيف أو الأحساء، يصل إليك فريقنا بسرعة لتقييم شفاف في موقعك.',
-aboutFeature2Title: 'دفع نقدي فوري',
-aboutFeature2Desc:
-  'نقوم بالدفع فور الاتفاق على السعر — بدون تأخير أو تحويلات بنكية أو انتظار.',
-aboutFeature3Title: 'خدمة نقل مجانية',
-aboutFeature3Desc:
-  'يتولى فريقنا النقل بالكامل دون أي تكلفة عليك. نصل إلى باب منزلك ونقيّم الأغراض وننقلها.',
+    aboutFeature1Title: 'الريادة في السوق',
+    aboutFeature1Desc:
+      'سواء كنت في الخبر أو الدمام أو القطيف أو الأحساء، يصل إليك فريقنا بسرعة لتقييم شفاف في موقعك.',
+    aboutFeature2Title: 'دفع نقدي فوري',
+    aboutFeature2Desc:
+      'نقوم بالدفع فور الاتفاق على السعر — بدون تأخير أو تحويلات بنكية أو انتظار.',
+    aboutFeature3Title: 'خدمة نقل مجانية',
+    aboutFeature3Desc:
+      'يتولى فريقنا النقل بالكامل دون أي تكلفة عليك. نصل إلى باب منزلك ونقيّم الأغراض وننقلها.',
 
-aboutProcessPill: 'خطوات بسيطة',
-aboutProcessTitle: 'كيف تبيع أثاثك المستعمل\nأو الخردة معنا؟',
-aboutProcessSubtitle:
-  'بيع الأثاث المستعمل أو الخردة معنا سهل وبدون متاعب. شارك تفاصيل أغراضك، احصل على تقدير سريع للسعر، وحدد موعد الاستلام بما يناسبك. نضمن لك عملية سلسة من البداية للنهاية مع أفضل قيمة.',
+    aboutProcessPill: 'خطوات بسيطة',
+    aboutProcessTitle: 'كيف تبيع أثاثك المستعمل\nأو الخردة معنا؟',
+    aboutProcessSubtitle:
+      'بيع الأثاث المستعمل أو الخردة معنا سهل وبدون متاعب. شارك تفاصيل أغراضك، احصل على تقدير سريع للسعر، وحدد موعد الاستلام بما يناسبك. نضمن لك عملية سلسة من البداية للنهاية مع أفضل قيمة.',
 
-aboutStep1Title: 'تواصل معنا',
-aboutStep1Desc:
-  'تواصل معنا عبر الهاتف أو واتساب لإرسال معلومات أولية عن الأثاث أو الخردة التي ترغب ببيعها.',
-aboutStep2Title: 'تحديد موعد',
-aboutStep2Desc:
-  'نحدد موعدًا مناسبًا للزيارة في الخبر أو منطقتك — وغالبًا تتوفر زيارات في نفس اليوم.',
-aboutStep3Title: 'معاينة في الموقع',
-aboutStep3Desc:
-  'يقوم فريقنا بتقييم الأغراض أو المعادن بدقة وشفافية في موقعك.',
-aboutStep4Title: 'تقديم السعر',
-aboutStep4Desc:
-  'نقدم أفضل سعر في السوق مع دفع فوري.',
-aboutStep5Title: 'النقل',
-aboutStep5Desc:
-  'ننقل الأثاث أو الخردة من موقعك بخدمة واضحة وسلسة.',
+    aboutStep1Title: 'تواصل معنا',
+    aboutStep1Desc:
+      'تواصل معنا عبر الهاتف أو واتساب لإرسال معلومات أولية عن الأثاث أو الخردة التي ترغب ببيعها.',
+    aboutStep2Title: 'تحديد موعد',
+    aboutStep2Desc:
+      'نحدد موعدًا مناسبًا للزيارة في الخبر أو منطقتك — وغالبًا تتوفر زيارات في نفس اليوم.',
+    aboutStep3Title: 'معاينة في الموقع',
+    aboutStep3Desc:
+      'يقوم فريقنا بتقييم الأغراض أو المعادن بدقة وشفافية في موقعك.',
+    aboutStep4Title: 'تقديم السعر',
+    aboutStep4Desc:
+      'نقدم أفضل سعر في السوق مع دفع فوري.',
+    aboutStep5Title: 'النقل',
+    aboutStep5Desc:
+      'ننقل الأثاث أو الخردة من موقعك بخدمة واضحة وسلسة.',
 
-aboutCtaTitle: 'جاهز للبيع؟ نصل إليك.',
-aboutCtaSubtitle:
-  'اتصل بنا الآن لزيارة في نفس اليوم وتقييم عادل ودفع نقدي فوري — في الخبر أو أي مكان آخر.',
-aboutCtaButton2: 'خدماتنا',
+    aboutCtaTitle: 'جاهز للبيع؟ نصل إليك.',
+    aboutCtaSubtitle:
+      'اتصل بنا الآن لزيارة في نفس اليوم وتقييم عادل ودفع نقدي فوري — في الخبر أو أي مكان آخر.',
+    aboutCtaButton2: 'خدماتنا',
 
     footerAboutTitle: 'من نحن',
     footerSupportTitle: 'الدعم والتثقيف',
@@ -667,15 +667,15 @@ aboutCtaButton2: 'خدماتنا',
     footerAgree: 'أوافق على حفظ بريدي لاستلام الرسائل',
     footerSubscribe: 'اشتراك',
     footerDescription:
-  'نحن متخصصون في شراء الأثاث المستعمل والأجهزة الكهربائية والخردة في الدمام.',
+      'نحن متخصصون في شراء الأثاث المستعمل والأجهزة الكهربائية والخردة في الدمام.',
 
-footerSupport1: 'شراء المكيفات المستعملة',
-footerSupport2: 'شراء الثلاجات والغسالات',
-footerSupport3: 'شراء الكنب وغرف المعيشة',
-footerSupport4: 'شراء الخردة والحديد',
+    footerSupport1: 'شراء المكيفات المستعملة',
+    footerSupport2: 'شراء الثلاجات والغسالات',
+    footerSupport3: 'شراء الكنب وغرف المعيشة',
+    footerSupport4: 'شراء الخردة والحديد',
 
-footerBottomCopyright:
-  'حقوق النشر © 2023. جميع الحقوق محفوظة.',
+    footerBottomCopyright:
+      'حقوق النشر © 2023. جميع الحقوق محفوظة.',
     copyright: '© 2026 شراء الأثاث المستعمل في الدمام. جميع الحقوق محفوظة.',
   },
 };
@@ -692,7 +692,7 @@ const Ctx = createContext<I18nCtx | null>(null);
 
 function getInitialLang(): Lang {
   if (typeof window === 'undefined') {
-    return 'en';
+    return 'ar';
   }
 
   const saved = window.localStorage.getItem('lang');
@@ -700,7 +700,7 @@ function getInitialLang(): Lang {
     return saved;
   }
 
-  return 'en';
+  return 'ar';
 }
 
 export function I18nProvider({ children }: { children: React.ReactNode }) {
