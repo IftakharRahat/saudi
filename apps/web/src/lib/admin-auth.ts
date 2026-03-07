@@ -5,7 +5,13 @@ import { authOptions } from '@/lib/auth';
 type AllowedRole = 'admin' | 'editor';
 
 export async function requireAdmin(allowedRoles: AllowedRole[] = ['admin']) {
-  const session = await getServerSession(authOptions);
+  let session;
+  try {
+    session = await getServerSession(authOptions);
+  } catch (error) {
+    console.error('Failed to get admin session.', error);
+    return NextResponse.json({ error: 'Authentication error.' }, { status: 500 });
+  }
 
   if (!session?.user?.id) {
     return NextResponse.json({ error: 'Unauthorized.' }, { status: 401 });
