@@ -17,7 +17,13 @@ export default function TopBar() {
         {/* Right: icons */}
         <div className="flex items-center gap-3">
           <Image src="/fb.png" alt="Facebook" width={18} height={18} />
-          <Image src="/insta.png" alt="Instagram" width={18} height={18} />
+          <a
+  href="https://instagram.com/futurecompanies"
+  target="_blank"
+  rel="noopener noreferrer"
+>
+  <Image src="/insta.png" alt="Instagram" width={18} height={18} />
+</a>
           <Image src="/yt.png" alt="YouTube" width={18} height={18} />
         </div>
       </div>
