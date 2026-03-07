@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react';
 import AdminSidebar from '@/components/admin/AdminSidebar';
 import AdminSignOutButton from '@/components/admin/AdminSignOutButton';
+import AdminLangToggle from '@/components/admin/AdminLangToggle';
 import { requireAdminPage } from '@/lib/admin-server';
 
 export default async function AdminProtectedLayout({ children }: { children: ReactNode }) {
@@ -16,6 +17,7 @@ export default async function AdminProtectedLayout({ children }: { children: Rea
           </div>
           <div className="flex items-center gap-3">
             <p className="hidden text-sm text-slate-600 md:block">{session.user.email}</p>
+            <AdminLangToggle />
             <AdminSignOutButton />
           </div>
         </div>

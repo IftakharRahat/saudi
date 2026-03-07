@@ -1,0 +1,226 @@
+'use client';
+
+import { useI18n } from '@/i18n/I18nProvider';
+
+type AdminDict = {
+    adminPanel: string;
+    dashboard: string;
+    services: string;
+    products: string;
+    testimonials: string;
+    faqs: string;
+    serviceAreas: string;
+    contacts: string;
+    subscribers: string;
+    settings: string;
+    signOut: string;
+    futureCompanies: string;
+    adminDashboard: string;
+
+    // Dashboard
+    overview: string;
+    overviewSubtitle: string;
+    quickActions: string;
+    manageServices: string;
+    manageProducts: string;
+    manageTestimonials: string;
+    manageFaqs: string;
+    manageAreas: string;
+    viewContacts: string;
+    viewSubscribers: string;
+
+    // Contacts page
+    contactSubmissions: string;
+    contactSubmissionsSub: string;
+    refresh: string;
+    loading: string;
+    noContactSubmissions: string;
+    failedLoadContacts: string;
+    date: string;
+    name: string;
+    phone: string;
+    email: string;
+    location: string;
+    message: string;
+
+    // Subscribers page
+    newsletterSubscribers: string;
+    newsletterSubscribersSub: string;
+    noSubscribers: string;
+    failedLoadSubscribers: string;
+
+    // Settings page
+    siteSettings: string;
+    siteSettingsSub: string;
+    supportPhone: string;
+    supportPhoneHint: string;
+    whatsappNumber: string;
+    whatsappNumberHint: string;
+    contactEmail: string;
+    contactEmailHint: string;
+    address: string;
+    addressHint: string;
+    saveSettings: string;
+    saving: string;
+    loadingSettings: string;
+    failedLoadSettings: string;
+
+    // CRUD
+    create: string;
+    edit: string;
+    delete: string;
+    cancel: string;
+    save: string;
+    active: string;
+    sortOrder: string;
+    yes: string;
+    no: string;
+};
+
+const ADMIN_DICT: Record<'en' | 'ar', AdminDict> = {
+    en: {
+        adminPanel: 'ADMIN PANEL',
+        dashboard: 'Dashboard',
+        services: 'Services',
+        products: 'Products',
+        testimonials: 'Testimonials',
+        faqs: 'FAQs',
+        serviceAreas: 'Service Areas',
+        contacts: 'Contacts',
+        subscribers: 'Subscribers',
+        settings: 'Settings',
+        signOut: 'Sign out',
+        futureCompanies: 'Future Companies',
+        adminDashboard: 'Admin Dashboard',
+
+        overview: 'Overview',
+        overviewSubtitle: 'Use the sections below to manage website content.',
+        quickActions: 'Quick Actions',
+        manageServices: 'Manage Services',
+        manageProducts: 'Manage Products',
+        manageTestimonials: 'Manage Testimonials',
+        manageFaqs: 'Manage FAQs',
+        manageAreas: 'Manage Service Areas',
+        viewContacts: 'View Contact Submissions',
+        viewSubscribers: 'View Subscribers',
+
+        contactSubmissions: 'Contact Submissions',
+        contactSubmissionsSub: 'Read incoming contact requests from the website.',
+        refresh: 'Refresh',
+        loading: 'Loading...',
+        noContactSubmissions: 'No contact submissions found.',
+        failedLoadContacts: 'Failed to load contact submissions.',
+        date: 'Date',
+        name: 'Name',
+        phone: 'Phone',
+        email: 'Email',
+        location: 'Location',
+        message: 'Message',
+
+        newsletterSubscribers: 'Newsletter Subscribers',
+        newsletterSubscribersSub: 'View all email subscriptions captured from the website.',
+        noSubscribers: 'No subscribers found.',
+        failedLoadSubscribers: 'Failed to load subscribers.',
+
+        siteSettings: 'Site Settings',
+        siteSettingsSub: 'Manage the floating call and WhatsApp contact buttons for the website.',
+        supportPhone: 'Support Phone',
+        supportPhoneHint: 'This value will be used for the call button link.',
+        whatsappNumber: 'WhatsApp Number',
+        whatsappNumberHint: 'Use digits only for WhatsApp, without spaces or plus sign.',
+        contactEmail: 'Contact Email',
+        contactEmailHint: 'Shown in the website header and footer.',
+        address: 'Address',
+        addressHint: 'Physical address shown in the website footer.',
+        saveSettings: 'Save Settings',
+        saving: 'Saving...',
+        loadingSettings: 'Loading settings...',
+        failedLoadSettings: 'Failed to load current settings.',
+
+        create: 'Create',
+        edit: 'Edit',
+        delete: 'Delete',
+        cancel: 'Cancel',
+        save: 'Save',
+        active: 'Active',
+        sortOrder: 'Sort Order',
+        yes: 'Yes',
+        no: 'No',
+    },
+    ar: {
+        adminPanel: 'لوحة الإدارة',
+        dashboard: 'لوحة التحكم',
+        services: 'الخدمات',
+        products: 'المنتجات',
+        testimonials: 'الشهادات',
+        faqs: 'الأسئلة الشائعة',
+        serviceAreas: 'مناطق الخدمة',
+        contacts: 'جهات الاتصال',
+        subscribers: 'المشتركون',
+        settings: 'الإعدادات',
+        signOut: 'تسجيل الخروج',
+        futureCompanies: 'شركات المستقبل',
+        adminDashboard: 'لوحة تحكم المشرف',
+
+        overview: 'نظرة عامة',
+        overviewSubtitle: 'استخدم الأقسام أدناه لإدارة محتوى الموقع.',
+        quickActions: 'إجراءات سريعة',
+        manageServices: 'إدارة الخدمات',
+        manageProducts: 'إدارة المنتجات',
+        manageTestimonials: 'إدارة الشهادات',
+        manageFaqs: 'إدارة الأسئلة الشائعة',
+        manageAreas: 'إدارة مناطق الخدمة',
+        viewContacts: 'عرض رسائل التواصل',
+        viewSubscribers: 'عرض المشتركين',
+
+        contactSubmissions: 'رسائل التواصل',
+        contactSubmissionsSub: 'اقرأ طلبات التواصل الواردة من الموقع.',
+        refresh: 'تحديث',
+        loading: 'جاري التحميل...',
+        noContactSubmissions: 'لا توجد رسائل تواصل.',
+        failedLoadContacts: 'فشل في تحميل رسائل التواصل.',
+        date: 'التاريخ',
+        name: 'الاسم',
+        phone: 'الهاتف',
+        email: 'البريد الإلكتروني',
+        location: 'الموقع',
+        message: 'الرسالة',
+
+        newsletterSubscribers: 'مشتركو النشرة البريدية',
+        newsletterSubscribersSub: 'عرض جميع اشتراكات البريد الإلكتروني.',
+        noSubscribers: 'لا يوجد مشتركون.',
+        failedLoadSubscribers: 'فشل في تحميل المشتركين.',
+
+        siteSettings: 'إعدادات الموقع',
+        siteSettingsSub: 'إدارة أزرار الاتصال والواتساب العائمة للموقع.',
+        supportPhone: 'هاتف الدعم',
+        supportPhoneHint: 'سيُستخدم هذا الرقم لزر الاتصال.',
+        whatsappNumber: 'رقم الواتساب',
+        whatsappNumberHint: 'استخدم الأرقام فقط بدون مسافات أو علامة الزائد.',
+        contactEmail: 'البريد الإلكتروني للتواصل',
+        contactEmailHint: 'يظهر في رأس وتذييل الموقع.',
+        address: 'العنوان',
+        addressHint: 'العنوان المادي المعروض في تذييل الموقع.',
+        saveSettings: 'حفظ الإعدادات',
+        saving: 'جاري الحفظ...',
+        loadingSettings: 'جاري تحميل الإعدادات...',
+        failedLoadSettings: 'فشل في تحميل الإعدادات الحالية.',
+
+        create: 'إنشاء',
+        edit: 'تعديل',
+        delete: 'حذف',
+        cancel: 'إلغاء',
+        save: 'حفظ',
+        active: 'نشط',
+        sortOrder: 'ترتيب',
+        yes: 'نعم',
+        no: 'لا',
+    },
+};
+
+export function useAdminI18n() {
+    const { lang, toggle, setLang } = useI18n();
+    const t = ADMIN_DICT[lang];
+    const dir: 'ltr' | 'rtl' = lang === 'ar' ? 'rtl' : 'ltr';
+    return { lang, dir, t, toggle, setLang };
+}

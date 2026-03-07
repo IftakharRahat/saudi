@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import { fetchAdminSubscribers } from '@/lib/admin-client';
 import type { SubscriberRecord } from '@/lib/content-types';
+import { useAdminI18n } from '@/i18n/admin-i18n';
 
 function formatDate(value: string) {
   try {
@@ -16,6 +17,7 @@ export default function AdminSubscribersPage() {
   const [items, setItems] = useState<SubscriberRecord[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+  const { t } = useAdminI18n();
 
   const load = async () => {
     setLoading(true);
@@ -24,7 +26,7 @@ export default function AdminSubscribersPage() {
       const data = await fetchAdminSubscribers();
       setItems(data);
     } catch {
-      setError('Failed to load subscribers.');
+      setError(t.failedLoadSubscribers);
     } finally {
       setLoading(false);
     }
@@ -38,32 +40,32 @@ export default function AdminSubscribersPage() {
     <div className="space-y-6">
       <section className="flex items-center justify-between gap-3">
         <div>
-          <h2 className="text-xl font-semibold text-slate-900">Newsletter Subscribers</h2>
-          <p className="mt-1 text-sm text-slate-600">View all email subscriptions captured from the website.</p>
+          <h2 className="text-xl font-semibold text-slate-900">{t.newsletterSubscribers}</h2>
+          <p className="mt-1 text-sm text-slate-600">{t.newsletterSubscribersSub}</p>
         </div>
         <button
           type="button"
           onClick={() => void load()}
           className="rounded-md border border-slate-300 bg-white px-3 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50"
         >
-          Refresh
+          {t.refresh}
         </button>
       </section>
 
       <section className="rounded-lg border border-slate-200 bg-white p-4 shadow-sm">
         {loading ? (
-          <p className="text-sm text-slate-500">Loading...</p>
+          <p className="text-sm text-slate-500">{t.loading}</p>
         ) : error ? (
           <p className="text-sm text-red-600">{error}</p>
         ) : items.length === 0 ? (
-          <p className="text-sm text-slate-500">No subscribers found.</p>
+          <p className="text-sm text-slate-500">{t.noSubscribers}</p>
         ) : (
           <div className="overflow-x-auto">
             <table className="min-w-full border-collapse text-sm">
               <thead>
                 <tr className="border-b border-slate-200">
-                  <th className="px-2 py-2 text-left font-semibold text-slate-600">Date</th>
-                  <th className="px-2 py-2 text-left font-semibold text-slate-600">Email</th>
+                  <th className="px-2 py-2 text-left font-semibold text-slate-600">{t.date}</th>
+                  <th className="px-2 py-2 text-left font-semibold text-slate-600">{t.email}</th>
                 </tr>
               </thead>
               <tbody>
