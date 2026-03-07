@@ -6,6 +6,8 @@ import { fetchSiteSettings, updateSiteSettings } from '@/lib/frontend-api';
 export default function AdminSettingsPage() {
   const [supportPhone, setSupportPhone] = useState('');
   const [whatsappPhone, setWhatsappPhone] = useState('');
+  const [contactEmail, setContactEmail] = useState('');
+  const [address, setAddress] = useState('');
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [message, setMessage] = useState('');
@@ -23,6 +25,8 @@ export default function AdminSettingsPage() {
         if (data) {
           setSupportPhone(data.supportPhone ?? '');
           setWhatsappPhone(data.whatsappPhone ?? '');
+          setContactEmail(data.contactEmail ?? '');
+          setAddress(data.address ?? '');
         }
       } catch {
         if (!active) return;
@@ -49,6 +53,8 @@ export default function AdminSettingsPage() {
     const result = await updateSiteSettings({
       supportPhone,
       whatsappPhone,
+      contactEmail,
+      address,
     });
 
     if (result.ok) {
@@ -110,6 +116,38 @@ export default function AdminSettingsPage() {
               </p>
             </div>
 
+            <div>
+              <label className="mb-2 block text-sm font-medium text-[#111827]">
+                Contact Email
+              </label>
+              <input
+                type="email"
+                value={contactEmail}
+                onChange={(e) => setContactEmail(e.target.value)}
+                placeholder="info@usedfurnituresaudi.com"
+                className="w-full rounded-[8px] border border-[#D1D5DB] px-4 py-3 text-sm outline-none focus:border-[#004FCE]"
+              />
+              <p className="mt-2 text-xs text-[#6B7280]">
+                Shown in the website header and footer.
+              </p>
+            </div>
+
+            <div>
+              <label className="mb-2 block text-sm font-medium text-[#111827]">
+                Address
+              </label>
+              <input
+                type="text"
+                value={address}
+                onChange={(e) => setAddress(e.target.value)}
+                placeholder="Dammam, Eastern Province, Saudi Arabia"
+                className="w-full rounded-[8px] border border-[#D1D5DB] px-4 py-3 text-sm outline-none focus:border-[#004FCE]"
+              />
+              <p className="mt-2 text-xs text-[#6B7280]">
+                Physical address shown in the website footer.
+              </p>
+            </div>
+
             <div className="flex items-center gap-3">
               <button
                 type="submit"
@@ -122,9 +160,8 @@ export default function AdminSettingsPage() {
 
             {status !== 'idle' && (
               <p
-                className={`text-sm ${
-                  status === 'success' ? 'text-green-700' : 'text-red-600'
-                }`}
+                className={`text-sm ${status === 'success' ? 'text-green-700' : 'text-red-600'
+                  }`}
               >
                 {message}
               </p>

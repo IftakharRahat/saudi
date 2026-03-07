@@ -89,6 +89,8 @@ export type SiteSettingsRecord = {
   id: string;
   supportPhone: string;
   whatsappPhone: string;
+  contactEmail: string;
+  address: string;
   createdAt: string;
   updatedAt: string;
 };

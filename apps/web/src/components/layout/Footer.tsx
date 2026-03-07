@@ -1,9 +1,9 @@
 'use client';
 
 import Image from 'next/image';
-import { FormEvent, useState } from 'react';
+import { FormEvent, useEffect, useState } from 'react';
 import { useI18n } from '@/i18n/I18nProvider';
-import { submitNewsletter } from '@/lib/frontend-api';
+import { submitNewsletter, fetchSiteSettings } from '@/lib/frontend-api';
 
 export default function Footer() {
   const { t } = useI18n();
@@ -12,6 +12,17 @@ export default function Footer() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [statusMessage, setStatusMessage] = useState('');
   const [statusType, setStatusType] = useState<'idle' | 'success' | 'error'>('idle');
+  const [contactPhone, setContactPhone] = useState('0578680908');
+  const [contactEmail, setContactEmail] = useState('info@usedfurnituresaudi.com');
+
+  useEffect(() => {
+    fetchSiteSettings()
+      .then((data) => {
+        if (data?.supportPhone) setContactPhone(data.supportPhone);
+        if (data?.contactEmail) setContactEmail(data.contactEmail);
+      })
+      .catch(() => { });
+  }, []);
 
   const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -51,27 +62,27 @@ export default function Footer() {
           </div>
           <h3 className="mb-2 text-lg font-semibold">{t.footerAboutTitle}</h3>
           <p className="text-sm leading-6 text-[#666]">
-  {t.footerDescription}
-</p>
+            {t.footerDescription}
+          </p>
         </div>
 
         {/* Support */}
         <div>
           <h3 className="mb-3 text-lg font-semibold">{t.footerSupportTitle}</h3>
           <ul className="space-y-2 text-sm text-[#333]">
-  <li>• {t.footerSupport1}</li>
-  <li>• {t.footerSupport2}</li>
-  <li>• {t.footerSupport3}</li>
-  <li>• {t.footerSupport4}</li>
-</ul>
+            <li>• {t.footerSupport1}</li>
+            <li>• {t.footerSupport2}</li>
+            <li>• {t.footerSupport3}</li>
+            <li>• {t.footerSupport4}</li>
+          </ul>
         </div>
 
         {/* Contact */}
         <div>
           <h3 className="mb-3 text-lg font-semibold">{t.footerContactTitle}</h3>
           <div className="space-y-2 text-sm text-[#333]">
-            <div>0578680908</div>
-            <div>info@usedfurnituresaudi.com</div>
+            <div>{contactPhone}</div>
+            <div>{contactEmail}</div>
           </div>
         </div>
 
@@ -132,9 +143,9 @@ export default function Footer() {
         </div>
       </div>
 
-     <div className="py-3 text-center text-xs text-[#666]">
-  {t.footerBottomCopyright}
-</div>
+      <div className="py-3 text-center text-xs text-[#666]">
+        {t.footerBottomCopyright}
+      </div>
     </footer>
   );
 }

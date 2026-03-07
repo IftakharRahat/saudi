@@ -192,6 +192,8 @@ export async function fetchSiteSettings() {
 export async function updateSiteSettings(data: {
   supportPhone: string;
   whatsappPhone: string;
+  contactEmail: string;
+  address: string;
 }) {
   const response = await fetch('/api/admin/settings', {
     method: 'PUT',

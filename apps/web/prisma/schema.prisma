@@ -116,6 +116,8 @@ model SiteSettings {
   id             String   @id @default(cuid())
   supportPhone   String   @db.VarChar(50)
   whatsappPhone  String   @db.VarChar(50)
+  contactEmail   String   @default("") @db.VarChar(100)
+  address        String   @default("") @db.VarChar(255)
   createdAt      DateTime @default(now())
   updatedAt      DateTime @updatedAt
 }

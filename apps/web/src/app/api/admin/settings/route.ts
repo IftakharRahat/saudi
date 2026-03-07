@@ -41,6 +41,8 @@ export async function PUT(request: NextRequest) {
 
   const supportPhone = String((body as { supportPhone?: string })?.supportPhone ?? '').trim();
   const whatsappPhone = String((body as { whatsappPhone?: string })?.whatsappPhone ?? '').trim();
+  const contactEmail = String((body as { contactEmail?: string })?.contactEmail ?? '').trim();
+  const address = String((body as { address?: string })?.address ?? '').trim();
 
   if (!supportPhone || !whatsappPhone) {
     return NextResponse.json(
@@ -56,12 +58,12 @@ export async function PUT(request: NextRequest) {
 
     const settings = existing
       ? await prisma.siteSettings.update({
-          where: { id: existing.id },
-          data: { supportPhone, whatsappPhone },
-        })
+        where: { id: existing.id },
+        data: { supportPhone, whatsappPhone, contactEmail, address },
+      })
       : await prisma.siteSettings.create({
-          data: { supportPhone, whatsappPhone },
-        });
+        data: { supportPhone, whatsappPhone, contactEmail, address },
+      });
 
     return NextResponse.json({ data: settings });
   } catch (error) {
