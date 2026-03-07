@@ -257,17 +257,50 @@ export default function LandingPage() {
 
   return (
     <div className="w-full">
-      <style jsx>{`
-        @keyframes supportBounce {
-          0%,
-          100% {
-            transform: translateY(0);
-          }
-          50% {
-            transform: translateY(-8px);
-          }
-        }
-      `}</style>
+     <style jsx>{`
+  @keyframes supportRipple {
+    0% {
+      transform: scale(1);
+      opacity: 0.45;
+    }
+    70% {
+      transform: scale(1.55);
+      opacity: 0;
+    }
+    100% {
+      transform: scale(1.55);
+      opacity: 0;
+    }
+  }
+
+  @keyframes iconRingShake {
+    0%,
+    100% {
+      transform: rotate(0deg);
+    }
+    5% {
+      transform: rotate(-22deg);
+    }
+    10% {
+      transform: rotate(22deg);
+    }
+    15% {
+      transform: rotate(-14deg);
+    }
+    20% {
+      transform: rotate(14deg);
+    }
+    25% {
+      transform: rotate(-10deg);
+    }
+    30% {
+      transform: rotate(10deg);
+    }
+    35% {
+      transform: rotate(0deg);
+    }
+  }
+`}</style>
 
       <section className="w-full">
         <div
@@ -551,35 +584,55 @@ export default function LandingPage() {
           </div>
         </div>
       </section>
-      <div className="fixed bottom-4 right-4 z-[9999] flex flex-col gap-3 sm:bottom-6 sm:right-6">
-        <a
-          href={siteSettings?.supportPhone ? `tel:${siteSettings.supportPhone}` : '#'}
-          aria-label="Call support"
-          className="flex h-14 w-14 items-center justify-center rounded-full bg-[#004FCE] text-white shadow-[0px_8px_30px_rgba(0,79,206,0.35)] transition-transform duration-200 hover:scale-105 motion-safe:animate-[supportBounce_3.2s_ease-in-out_infinite] sm:h-16 sm:w-16"
-          style={!siteSettings?.supportPhone ? { pointerEvents: 'none', opacity: 0.65 } : undefined}
-        >
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-            <path
-              d="M6.6 10.8c1.4 2.8 3.8 5.2 6.6 6.6l2.2-2.2c.3-.3.7-.4 1.1-.2 1.2.4 2.5.7 3.8.7.6 0 1 .4 1 1V21c0 .6-.4 1-1 1C11.3 22 2 12.7 2 3c0-.6.4-1 1-1h3.6c.6 0 1 .4 1 1 0 1.3.2 2.6.7 3.8.1.4 0 .8-.2 1.1L6.6 10.8Z"
-              fill="currentColor"
-            />
-          </svg>
-        </a>
-
+                <div className="fixed bottom-4 right-4 z-[9999] flex flex-col gap-4 sm:bottom-6 sm:right-6">
         <a
           href={siteSettings?.whatsappPhone ? `https://wa.me/${siteSettings.whatsappPhone}` : '#'}
           target="_blank"
           rel="noopener noreferrer"
           aria-label="Chat on WhatsApp"
-          
-          className="flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366] text-white shadow-[0px_8px_30px_rgba(37,211,102,0.35)] transition-transform duration-200 hover:scale-105 motion-safe:animate-[supportBounce_3.2s_ease-in-out_infinite] sm:h-16 sm:w-16"
+          className="relative flex h-[64px] w-[64px] items-center justify-center sm:h-[72px] sm:w-[72px]"
+          style={!siteSettings?.whatsappPhone ? { pointerEvents: 'none', opacity: 0.65 } : undefined}
         >
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-            <path
-              d="M19.05 4.91A9.82 9.82 0 0 0 12.03 2C6.56 2 2.1 6.46 2.1 11.93c0 1.75.46 3.46 1.33 4.97L2 22l5.24-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.47 0 9.93-4.46 9.93-9.93 0-2.65-1.03-5.14-2.92-7Zm-7.02 15.26h-.01a8.2 8.2 0 0 1-4.18-1.14l-.3-.18-3.11.82.83-3.03-.2-.31a8.18 8.18 0 0 1-1.26-4.39c0-4.52 3.68-8.2 8.21-8.2 2.19 0 4.24.85 5.79 2.4a8.13 8.13 0 0 1 2.4 5.8c0 4.52-3.68 8.2-8.17 8.2Zm4.5-6.15c-.25-.13-1.47-.73-1.7-.82-.23-.08-.4-.12-.57.13-.17.25-.65.82-.8.98-.15.17-.3.19-.55.07-.25-.13-1.06-.39-2.01-1.25-.74-.66-1.24-1.48-1.38-1.73-.14-.25-.01-.38.11-.5.11-.11.25-.3.37-.45.12-.15.16-.25.25-.42.08-.17.04-.32-.02-.45-.06-.13-.57-1.37-.78-1.88-.21-.5-.42-.43-.57-.44h-.49c-.17 0-.45.06-.68.32-.23.25-.89.87-.89 2.12 0 1.25.91 2.46 1.03 2.63.13.17 1.79 2.73 4.33 3.83.61.26 1.09.42 1.46.54.61.19 1.16.16 1.6.1.49-.07 1.47-.6 1.68-1.18.21-.58.21-1.08.15-1.18-.06-.1-.23-.16-.48-.29Z"
-              fill="currentColor"
-            />
-          </svg>
+          <span className="absolute inset-0 rounded-full bg-[#7DFFA0] opacity-40 motion-safe:animate-[supportRipple_1.8s_ease-out_infinite]" />
+          <span className="relative z-10 flex h-[48px] w-[48px] items-center justify-center rounded-full bg-[#25D366] shadow-[0px_0px_18px_rgba(37,211,102,0.45)] sm:h-[70px] sm:w-[70px]">
+            <svg
+  width="40"
+  height="40"
+  viewBox="0 0 24 24"
+  fill="none"
+  aria-hidden="true"
+  className="origin-center motion-safe:animate-[iconRingShake_1.8s_linear_infinite]"
+>
+              <path
+                d="M19.05 4.91A9.82 9.82 0 0 0 12.03 2C6.56 2 2.1 6.46 2.1 11.93c0 1.75.46 3.46 1.33 4.97L2 22l5.24-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.47 0 9.93-4.46 9.93-9.93 0-2.65-1.03-5.14-2.92-7Zm-7.02 15.26h-.01a8.2 8.2 0 0 1-4.18-1.14l-.3-.18-3.11.82.83-3.03-.2-.31a8.18 8.18 0 0 1-1.26-4.39c0-4.52 3.68-8.2 8.21-8.2 2.19 0 4.24.85 5.79 2.4a8.13 8.13 0 0 1 2.4 5.8c0 4.52-3.68 8.2-8.17 8.2Zm4.5-6.15c-.25-.13-1.47-.73-1.7-.82-.23-.08-.4-.12-.57.13-.17.25-.65.82-.8.98-.15.17-.3.19-.55.07-.25-.13-1.06-.39-2.01-1.25-.74-.66-1.24-1.48-1.38-1.73-.14-.25-.01-.38.11-.5.11-.11.25-.3.37-.45.12-.15.16-.25.25-.42.08-.17.04-.32-.02-.45-.06-.13-.57-1.37-.78-1.88-.21-.5-.42-.43-.57-.44h-.49c-.17 0-.45.06-.68.32-.23.25-.89.87-.89 2.12 0 1.25.91 2.46 1.03 2.63.13.17 1.79 2.73 4.33 3.83.61.26 1.09.42 1.46.54.61.19 1.16.16 1.6.1.49-.07 1.47-.6 1.68-1.18.21-.58.21-1.08.15-1.18-.06-.1-.23-.16-.48-.29Z"
+                fill="white"
+              />
+            </svg>
+          </span>
+        </a>
+
+        <a
+          href={siteSettings?.supportPhone ? `tel:${siteSettings.supportPhone}` : '#'}
+          aria-label="Call support"
+          className="relative flex h-[64px] w-[64px] items-center justify-center sm:h-[80px] sm:w-[80px]"
+          style={!siteSettings?.supportPhone ? { pointerEvents: 'none', opacity: 0.65 } : undefined}
+        >
+          <span className="absolute inset-0 rounded-full bg-[#FFB3B3] opacity-40 motion-safe:animate-[supportRipple_1.8s_ease-out_infinite]" />
+          <span className="relative z-10 flex h-[48px] w-[48px] items-center justify-center rounded-full bg-[#FF1F1F] shadow-[0px_0px_18px_rgba(255,31,31,0.45)] sm:h-[70px] sm:w-[70px]">
+           <svg
+  width="45"
+  height="45"
+  viewBox="0 0 26 23"
+  fill="none"
+  aria-hidden="true"
+  className="origin-center motion-safe:animate-[iconRingShake_1.8s_linear_infinite]"
+>
+              <path
+                d="M7.62 3.51c.3-.27.74-.3 1.07-.08l2.15 1.42c.38.25.53.74.36 1.17l-.8 1.98c-.1.25-.05.53.12.73l4.2 4.2c.2.17.48.22.73.12l1.98-.8c.43-.17.92-.02 1.17.36l1.42 2.15c.22.33.19.77-.08 1.07l-1.45 1.61c-.4.45-1.03.64-1.62.47-2.24-.64-4.36-1.95-6.24-3.83-1.88-1.88-3.19-4-3.83-6.24-.17-.59.02-1.22.47-1.62l1.61-1.45Z"
+                fill="white"
+              />
+            </svg>
+          </span>
         </a>
       </div>
     </div>
