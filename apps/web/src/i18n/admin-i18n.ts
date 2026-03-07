@@ -65,6 +65,21 @@ type AdminDict = {
     loadingSettings: string;
     failedLoadSettings: string;
 
+    // Account
+    account: string;
+    accountSub: string;
+    currentEmail: string;
+    newEmail: string;
+    currentPassword: string;
+    newPassword: string;
+    confirmNewPassword: string;
+    updateEmail: string;
+    updatePassword: string;
+    updating: string;
+    passwordsDoNotMatch: string;
+    changeLoginEmail: string;
+    changePassword: string;
+
     // CRUD
     create: string;
     edit: string;
@@ -137,6 +152,20 @@ const ADMIN_DICT: Record<'en' | 'ar', AdminDict> = {
         loadingSettings: 'Loading settings...',
         failedLoadSettings: 'Failed to load current settings.',
 
+        account: 'Account',
+        accountSub: 'Update your login email or password.',
+        currentEmail: 'Current Email',
+        newEmail: 'New Email',
+        currentPassword: 'Current Password',
+        newPassword: 'New Password',
+        confirmNewPassword: 'Confirm New Password',
+        updateEmail: 'Update Email',
+        updatePassword: 'Update Password',
+        updating: 'Updating...',
+        passwordsDoNotMatch: 'Passwords do not match.',
+        changeLoginEmail: 'Change Login Email',
+        changePassword: 'Change Password',
+
         create: 'Create',
         edit: 'Edit',
         delete: 'Delete',
@@ -205,6 +234,20 @@ const ADMIN_DICT: Record<'en' | 'ar', AdminDict> = {
         saving: 'جاري الحفظ...',
         loadingSettings: 'جاري تحميل الإعدادات...',
         failedLoadSettings: 'فشل في تحميل الإعدادات الحالية.',
+
+        account: 'الحساب',
+        accountSub: 'تحديث البريد الإلكتروني أو كلمة المرور.',
+        currentEmail: 'البريد الإلكتروني الحالي',
+        newEmail: 'البريد الإلكتروني الجديد',
+        currentPassword: 'كلمة المرور الحالية',
+        newPassword: 'كلمة المرور الجديدة',
+        confirmNewPassword: 'تأكيد كلمة المرور الجديدة',
+        updateEmail: 'تحديث البريد الإلكتروني',
+        updatePassword: 'تحديث كلمة المرور',
+        updating: 'جاري التحديث...',
+        passwordsDoNotMatch: 'كلمتا المرور غير متطابقتين.',
+        changeLoginEmail: 'تغيير البريد الإلكتروني',
+        changePassword: 'تغيير كلمة المرور',
 
         create: 'إنشاء',
         edit: 'تعديل',
