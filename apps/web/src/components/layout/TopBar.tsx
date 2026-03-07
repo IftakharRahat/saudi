@@ -18,7 +18,7 @@ export default function TopBar() {
         <div className="flex items-center gap-3">
           <Image src="/fb.png" alt="Facebook" width={18} height={18} />
           <a
-  href="https://instagram.com/futurecompanies"
+  href="https://www.instagram.com/furniture.move.ksa_0548531681?igsh=MWE2bHl0bzM2bnFzcQ=="
   target="_blank"
   rel="noopener noreferrer"
 >
