@@ -3,6 +3,7 @@ import type {
   ProductRecord,
   ServiceAreaRecord,
   ServiceRecord,
+  SiteSettingsRecord,
   TestimonialRecord,
 } from '@/lib/content-types';
 
@@ -170,5 +171,47 @@ export async function submitContactForm(data: ContactPayload) {
     ok: true,
     message: payload?.message ?? 'Contact form submitted successfully.',
     fieldErrors: {} as Record<string, string[] | undefined>,
+  };
+}
+
+export async function fetchSiteSettings() {
+  const response = await fetch('/api/site-settings', { cache: 'no-store' });
+
+  if (response.status === 404) {
+    return null;
+  }
+
+  if (!response.ok) {
+    throw new Error(`Request failed for /api/site-settings: ${response.status}`);
+  }
+
+  const payload = await parseJson<{ data: SiteSettingsRecord | null }>(response);
+  return payload?.data ?? null;
+}
+
+export async function updateSiteSettings(data: {
+  supportPhone: string;
+  whatsappPhone: string;
+}) {
+  const response = await fetch('/api/admin/settings', {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(data),
+  });
+
+  const payload = await parseJson<{ data?: SiteSettingsRecord; error?: string }>(response);
+
+  if (!response.ok) {
+    return {
+      ok: false,
+      message: payload?.error ?? 'Failed to update settings.',
+      data: null,
+    };
+  }
+
+  return {
+    ok: true,
+    message: 'Settings updated successfully.',
+    data: payload?.data ?? null,
   };
 }

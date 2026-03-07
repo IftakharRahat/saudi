@@ -4,8 +4,20 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { FormEvent, useEffect, useMemo, useState } from 'react';
 import { useI18n } from '@/i18n/I18nProvider';
-import { FaqRecord, ServiceRecord, TestimonialRecord, pickLocalized } from '@/lib/content-types';
-import { fetchFaqs, fetchServices, fetchTestimonials, submitNewsletter } from '@/lib/frontend-api';
+import {
+  FaqRecord,
+  ServiceRecord,
+  SiteSettingsRecord,
+  TestimonialRecord,
+  pickLocalized,
+} from '@/lib/content-types';
+import {
+  fetchFaqs,
+  fetchServices,
+  fetchSiteSettings,
+  fetchTestimonials,
+  submitNewsletter,
+} from '@/lib/frontend-api';
 
 type ServiceCard = {
   id: string;
@@ -43,9 +55,6 @@ const SERVICE_FALLBACK_IMAGES = [
 
 const TESTIMONIAL_FALLBACK_IMAGE = '/landing-page/elegant-businessman-office 1.png';
 
-const SUPPORT_PHONE = '+966500000000';
-const SUPPORT_WHATSAPP = '966500000000'; // without +, spaces, or dashes
-
 function resolveServiceImage(imageUrl: string | undefined, index: number) {
   if (imageUrl && imageUrl.trim().length > 0) {
     return imageUrl;
@@ -62,6 +71,7 @@ export default function LandingPage() {
   const [apiServices, setApiServices] = useState<ServiceRecord[]>([]);
   const [apiFaqs, setApiFaqs] = useState<FaqRecord[]>([]);
   const [apiTestimonials, setApiTestimonials] = useState<TestimonialRecord[]>([]);
+  const [siteSettings, setSiteSettings] = useState<SiteSettingsRecord | null>(null);
 
   const [openFaq, setOpenFaq] = useState<number | null>(1);
   const [subscribeEmail, setSubscribeEmail] = useState('');
@@ -73,10 +83,11 @@ export default function LandingPage() {
     let active = true;
 
     const load = async () => {
-      const [servicesResult, faqsResult, testimonialsResult] = await Promise.allSettled([
+      const [servicesResult, faqsResult, testimonialsResult, settingsResult] = await Promise.allSettled([
         fetchServices(),
         fetchFaqs(),
         fetchTestimonials(),
+        fetchSiteSettings(),
       ]);
 
       if (!active) {
@@ -91,6 +102,9 @@ export default function LandingPage() {
       }
       if (testimonialsResult.status === 'fulfilled') {
         setApiTestimonials(testimonialsResult.value);
+      }
+      if (settingsResult.status === 'fulfilled') {
+        setSiteSettings(settingsResult.value);
       }
     };
 
@@ -243,8 +257,7 @@ export default function LandingPage() {
 
   return (
     <div className="w-full">
-      <section className="w-full">
-              <style jsx>{`
+      <style jsx>{`
         @keyframes supportBounce {
           0%,
           100% {
@@ -255,6 +268,8 @@ export default function LandingPage() {
           }
         }
       `}</style>
+
+      <section className="w-full">
         <div
           className="w-full"
           style={{
@@ -536,12 +551,12 @@ export default function LandingPage() {
           </div>
         </div>
       </section>
-
       <div className="fixed bottom-4 right-4 z-[9999] flex flex-col gap-3 sm:bottom-6 sm:right-6">
         <a
-          href={`tel:${SUPPORT_PHONE}`}
+          href={siteSettings?.supportPhone ? `tel:${siteSettings.supportPhone}` : '#'}
           aria-label="Call support"
           className="flex h-14 w-14 items-center justify-center rounded-full bg-[#004FCE] text-white shadow-[0px_8px_30px_rgba(0,79,206,0.35)] transition-transform duration-200 hover:scale-105 motion-safe:animate-[supportBounce_3.2s_ease-in-out_infinite] sm:h-16 sm:w-16"
+          style={!siteSettings?.supportPhone ? { pointerEvents: 'none', opacity: 0.65 } : undefined}
         >
           <svg width="28" height="28" viewBox="0 0 24 24" fill="none" aria-hidden="true">
             <path
@@ -552,10 +567,11 @@ export default function LandingPage() {
         </a>
 
         <a
-          href={`https://wa.me/${SUPPORT_WHATSAPP}`}
+          href={siteSettings?.whatsappPhone ? `https://wa.me/${siteSettings.whatsappPhone}` : '#'}
           target="_blank"
           rel="noopener noreferrer"
           aria-label="Chat on WhatsApp"
+          
           className="flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366] text-white shadow-[0px_8px_30px_rgba(37,211,102,0.35)] transition-transform duration-200 hover:scale-105 motion-safe:animate-[supportBounce_3.2s_ease-in-out_infinite] sm:h-16 sm:w-16"
         >
           <svg width="28" height="28" viewBox="0 0 24 24" fill="none" aria-hidden="true">
