@@ -85,3 +85,10 @@ export type SubscriberRecord = {
 export function pickLocalized(lang: AppLang, en: string, ar: string) {
   return lang === 'ar' ? ar : en;
 }
+export type SiteSettingsRecord = {
+  id: string;
+  supportPhone: string;
+  whatsappPhone: string;
+  createdAt: string;
+  updatedAt: string;
+};

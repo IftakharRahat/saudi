@@ -111,3 +111,11 @@ model PageContent {
   contentAr Json
   updatedAt DateTime @updatedAt
 }
+
+model SiteSettings {
+  id             String   @id @default(cuid())
+  supportPhone   String   @db.VarChar(50)
+  whatsappPhone  String   @db.VarChar(50)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+}

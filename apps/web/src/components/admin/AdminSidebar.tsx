@@ -12,6 +12,7 @@ const LINKS = [
   { href: '/admin/areas', label: 'Service Areas' },
   { href: '/admin/contacts', label: 'Contacts' },
   { href: '/admin/subscribers', label: 'Subscribers' },
+  { href: '/admin/settings', label: 'Settings' },
 ];
 
 export default function AdminSidebar() {
