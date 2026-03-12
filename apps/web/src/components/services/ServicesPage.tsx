@@ -217,12 +217,14 @@ export default function ServicesPage() {
                 key={card.id}
                 className="overflow-hidden rounded-[15px] border border-black/10 bg-white shadow-[0px_4px_60px_0px_rgba(0,0,0,0.06)]"
               >
-                <div className="relative aspect-[544/277] w-full bg-black/5">
+                <Link href={getServiceHref(card.id)} className="relative block aspect-[544/277] w-full bg-black/5">
                   <Image src={card.img} alt={card.title} fill className="object-cover" unoptimized />
-                </div>
+                </Link>
 
                 <div className="p-5 text-center">
-                  <h3 className="text-[16px] font-semibold text-[#004FCE]">{card.title}</h3>
+                  <Link href={getServiceHref(card.id)} className="text-[16px] font-semibold text-[#004FCE] hover:underline">
+                    {card.title}
+                  </Link>
                   <p className="mt-2 text-xs leading-5 text-[#666]">{card.description}</p>
                   <Link
                     href={getServiceHref(card.id)}

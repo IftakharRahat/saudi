@@ -1,8 +1,8 @@
 'use client';
 
-import { FormEvent, useMemo, useState } from 'react';
+import { FormEvent, useEffect, useMemo, useState } from 'react';
 import { useI18n } from '@/i18n/I18nProvider';
-import { submitContactForm } from '@/lib/frontend-api';
+import { submitContactForm, fetchSiteSettings } from '@/lib/frontend-api';
 
 type ContactFormState = {
   name: string;
@@ -28,6 +28,23 @@ export default function ContactPage() {
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
   const [submitMessage, setSubmitMessage] = useState('');
   const [fieldErrors, setFieldErrors] = useState<Record<string, string[] | undefined>>({});
+
+  // Dynamic contact info from admin settings (falls back to i18n defaults)
+  const [phoneValue, setPhoneValue] = useState('');
+  const [emailValue, setEmailValue] = useState('');
+  const [addressValue, setAddressValue] = useState('');
+
+  useEffect(() => {
+    fetchSiteSettings()
+      .then((data) => {
+        if (data?.supportPhone) setPhoneValue(data.supportPhone);
+        if (data?.contactEmail) setEmailValue(data.contactEmail);
+        if (data?.address) setAddressValue(data.address);
+      })
+      .catch(() => {
+        // silently fall back to i18n defaults
+      });
+  }, []);
 
   const fields = useMemo(
     () => [
@@ -108,7 +125,7 @@ export default function ContactPage() {
                     {t.contactPhoneNumberLabel}
                   </div>
                   <div className="text-[16px] leading-6 text-[#666]">
-                    {t.contactPhoneNumberValue}
+                    {phoneValue || t.contactPhoneNumberValue}
                   </div>
                 </div>
               </div>
@@ -123,7 +140,7 @@ export default function ContactPage() {
                     {t.contactEmailLabel}
                   </div>
                   <div className="text-[16px] leading-6 text-[#666]">
-                    {t.contactEmailValue}
+                    {emailValue || t.contactEmailValue}
                   </div>
                 </div>
               </div>
@@ -138,7 +155,7 @@ export default function ContactPage() {
                     {t.contactLocationLabel}
                   </div>
                   <div className="text-[16px] leading-6 text-[#666]">
-                    {t.contactLocationValue}
+                    {addressValue || t.contactLocationValue}
                   </div>
                 </div>
               </div>
