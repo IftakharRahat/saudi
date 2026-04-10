@@ -18,6 +18,7 @@ export default function AdminSidebar() {
     { href: '/admin/contacts', label: t.contacts },
     { href: '/admin/subscribers', label: t.subscribers },
     { href: '/admin/settings', label: t.settings },
+    { href: '/admin/seo', label: t.seo },
     { href: '/admin/account', label: t.account },
   ];
 

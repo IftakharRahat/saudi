@@ -181,3 +181,35 @@ export const serviceAreaUpdateSchema = z
   })
   .partial()
   .refine((value) => Object.keys(value).length > 0, 'At least one field is required for update.');
+
+const optionalUrl = z.string().trim().max(2048).default('');
+const optionalText = z.string().trim().max(10000).default('');
+
+export const seoCreateSchema = z.object({
+  pageSlug: z.string().trim().min(1).max(200),
+  metaTitle: z.string().trim().max(200).default(''),
+  metaDescription: z.string().trim().max(1000).default(''),
+  ogTitle: z.string().trim().max(200).default(''),
+  ogDescription: z.string().trim().max(1000).default(''),
+  ogImage: optionalUrl,
+  ogUrl: optionalUrl,
+  schema: optionalText,
+  content: optionalText,
+  image: optionalUrl,
+});
+
+export const seoUpdateSchema = z
+  .object({
+    pageSlug: z.string().trim().min(1).max(200),
+    metaTitle: z.string().trim().max(200),
+    metaDescription: z.string().trim().max(1000),
+    ogTitle: z.string().trim().max(200),
+    ogDescription: z.string().trim().max(1000),
+    ogImage: z.string().trim().max(2048),
+    ogUrl: z.string().trim().max(2048),
+    schema: z.string().trim().max(10000),
+    content: z.string().trim().max(10000),
+    image: z.string().trim().max(2048),
+  })
+  .partial()
+  .refine((value) => Object.keys(value).length > 0, 'At least one field is required for update.');

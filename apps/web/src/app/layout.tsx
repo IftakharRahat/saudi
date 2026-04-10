@@ -4,7 +4,10 @@ import { I18nProvider } from '@/i18n/I18nProvider';
 import SiteShell from '@/components/layout/SiteShell';
 
 export const metadata: Metadata = {
-  title: 'Future Companies',
+  title: {
+    default: 'Future Companies',
+    template: '%s | Future Companies',
+  },
   description: 'Used Furniture Saudi',
 };
 

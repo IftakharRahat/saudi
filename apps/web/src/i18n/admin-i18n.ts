@@ -90,6 +90,29 @@ type AdminDict = {
     sortOrder: string;
     yes: string;
     no: string;
+
+    // SEO
+    seo: string;
+    seoManagement: string;
+    seoManagementSub: string;
+    pageSlug: string;
+    pageSlugHint: string;
+    metaTitle: string;
+    metaDescription: string;
+    ogTitle: string;
+    ogDescription: string;
+    ogImage: string;
+    ogUrl: string;
+    schemaJsonLd: string;
+    schemaJsonLdHint: string;
+    contentText: string;
+    pageImage: string;
+    addSeoEntry: string;
+    editSeoEntry: string;
+    noSeoEntries: string;
+    failedLoadSeo: string;
+    confirmDeleteSeo: string;
+    actions: string;
 };
 
 const ADMIN_DICT: Record<'en' | 'ar', AdminDict> = {
@@ -175,6 +198,28 @@ const ADMIN_DICT: Record<'en' | 'ar', AdminDict> = {
         sortOrder: 'Sort Order',
         yes: 'Yes',
         no: 'No',
+
+        seo: 'SEO',
+        seoManagement: 'SEO Management',
+        seoManagementSub: 'Manage meta tags, Open Graph, schema, and content for each page.',
+        pageSlug: 'Page Slug',
+        pageSlugHint: 'e.g. home, about, services/furniture-removal',
+        metaTitle: 'Meta Title',
+        metaDescription: 'Meta Description',
+        ogTitle: 'OG Title',
+        ogDescription: 'OG Description',
+        ogImage: 'OG Image URL',
+        ogUrl: 'OG URL (Canonical)',
+        schemaJsonLd: 'Schema (JSON-LD)',
+        schemaJsonLdHint: 'Paste structured data JSON here.',
+        contentText: 'Content',
+        pageImage: 'Page Image URL',
+        addSeoEntry: 'Add SEO Entry',
+        editSeoEntry: 'Edit SEO Entry',
+        noSeoEntries: 'No SEO entries found. Create one to get started.',
+        failedLoadSeo: 'Failed to load SEO entries.',
+        confirmDeleteSeo: 'Are you sure you want to delete this SEO entry?',
+        actions: 'Actions',
     },
     ar: {
         adminPanel: 'لوحة الإدارة',
@@ -258,6 +303,28 @@ const ADMIN_DICT: Record<'en' | 'ar', AdminDict> = {
         sortOrder: 'ترتيب',
         yes: 'نعم',
         no: 'لا',
+
+        seo: 'تحسين محركات البحث',
+        seoManagement: 'إدارة تحسين محركات البحث',
+        seoManagementSub: 'إدارة العلامات الوصفية و Open Graph والمخطط والمحتوى لكل صفحة.',
+        pageSlug: 'معرّف الصفحة',
+        pageSlugHint: 'مثال: home, about, services/furniture-removal',
+        metaTitle: 'عنوان الميتا',
+        metaDescription: 'وصف الميتا',
+        ogTitle: 'عنوان OG',
+        ogDescription: 'وصف OG',
+        ogImage: 'رابط صورة OG',
+        ogUrl: 'رابط OG (الرابط الأساسي)',
+        schemaJsonLd: 'المخطط (JSON-LD)',
+        schemaJsonLdHint: 'الصق بيانات JSON المنظمة هنا.',
+        contentText: 'المحتوى',
+        pageImage: 'رابط صورة الصفحة',
+        addSeoEntry: 'إضافة سجل SEO',
+        editSeoEntry: 'تعديل سجل SEO',
+        noSeoEntries: 'لا توجد سجلات SEO. أنشئ واحدًا للبدء.',
+        failedLoadSeo: 'فشل في تحميل سجلات SEO.',
+        confirmDeleteSeo: 'هل أنت متأكد من حذف هذا السجل؟',
+        actions: 'الإجراءات',
     },
 };
 

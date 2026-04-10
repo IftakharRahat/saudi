@@ -217,3 +217,52 @@ export async function updateSiteSettings(data: {
     data: payload?.data ?? null,
   };
 }
+
+// ── SEO entries ──────────────────────────────────────────────────
+
+export async function fetchSeoEntries() {
+  return fetchData<import('@/lib/content-types').PageSeoRecord>('/api/admin/seo', 1, 200);
+}
+
+export async function fetchSeoById(id: string) {
+  const response = await fetch(`/api/admin/seo/${id}`, { cache: 'no-store' });
+  if (response.status === 404) return null;
+  if (!response.ok) throw new Error(`Request failed for /api/admin/seo/${id}: ${response.status}`);
+  const payload = await parseJson<{ data: import('@/lib/content-types').PageSeoRecord }>(response);
+  return payload?.data ?? null;
+}
+
+export async function createSeoEntry(data: Record<string, string>) {
+  const response = await fetch('/api/admin/seo', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(data),
+  });
+  const payload = await parseJson<{ data?: unknown; error?: string }>(response);
+  if (!response.ok) {
+    return { ok: false as const, message: payload?.error ?? 'Failed to create SEO entry.' };
+  }
+  return { ok: true as const, message: 'SEO entry created.' };
+}
+
+export async function updateSeoEntry(id: string, data: Record<string, string>) {
+  const response = await fetch(`/api/admin/seo/${id}`, {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(data),
+  });
+  const payload = await parseJson<{ data?: unknown; error?: string }>(response);
+  if (!response.ok) {
+    return { ok: false as const, message: payload?.error ?? 'Failed to update SEO entry.' };
+  }
+  return { ok: true as const, message: 'SEO entry updated.' };
+}
+
+export async function deleteSeoEntry(id: string) {
+  const response = await fetch(`/api/admin/seo/${id}`, { method: 'DELETE' });
+  const payload = await parseJson<{ message?: string; error?: string }>(response);
+  if (!response.ok) {
+    return { ok: false as const, message: payload?.error ?? 'Failed to delete SEO entry.' };
+  }
+  return { ok: true as const, message: payload?.message ?? 'SEO entry deleted.' };
+}

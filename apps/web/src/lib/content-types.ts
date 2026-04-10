@@ -94,3 +94,19 @@ export type SiteSettingsRecord = {
   createdAt: string;
   updatedAt: string;
 };
+
+export type PageSeoRecord = {
+  id: string;
+  pageSlug: string;
+  metaTitle: string;
+  metaDescription: string;
+  ogTitle: string;
+  ogDescription: string;
+  ogImage: string;
+  ogUrl: string;
+  schema: string;
+  content: string;
+  image: string;
+  createdAt: string;
+  updatedAt: string;
+};
