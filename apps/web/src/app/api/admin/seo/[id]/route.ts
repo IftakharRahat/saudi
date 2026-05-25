@@ -1,6 +1,7 @@
 import { Prisma } from '@prisma/client';
 import { NextResponse } from 'next/server';
 import { requireAdmin } from '@/lib/admin-auth';
+import { toPageSeoRecord, toPageSeoUpdateData } from '@/lib/page-seo';
 import { prisma } from '@/lib/prisma';
 import { idParamSchema, seoUpdateSchema } from '@/lib/validation';
 
@@ -31,7 +32,7 @@ export async function GET(
       return NextResponse.json({ error: 'SEO entry not found.' }, { status: 404 });
     }
 
-    return NextResponse.json({ data: entry });
+    return NextResponse.json({ data: toPageSeoRecord(entry) });
   } catch (error) {
     console.error(`Failed to fetch admin SEO entry ${id}.`, error);
     return NextResponse.json({ error: 'Failed to fetch SEO entry.' }, { status: 500 });
@@ -72,13 +73,16 @@ export async function PUT(
   try {
     const entry = await prisma.pageSeo.update({
       where: { id },
-      data: parsed.data,
+      data: toPageSeoUpdateData(parsed.data),
     });
 
-    return NextResponse.json({ data: entry });
+    return NextResponse.json({ data: toPageSeoRecord(entry) });
   } catch (error) {
     if (error instanceof Prisma.PrismaClientKnownRequestError && error.code === 'P2025') {
       return NextResponse.json({ error: 'SEO entry not found.' }, { status: 404 });
+    }
+    if (error instanceof Prisma.PrismaClientKnownRequestError && error.code === 'P2002') {
+      return NextResponse.json({ error: 'A SEO entry for this URL already exists.' }, { status: 409 });
     }
 
     console.error(`Failed to update SEO entry ${id}.`, error);

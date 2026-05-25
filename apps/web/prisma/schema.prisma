@@ -127,6 +127,12 @@ model PageSeo {
   pageSlug        String   @unique
   metaTitle       String   @default("")
   metaDescription String   @default("")
+  focusKeyword    String   @default("")
+  secondaryKeywords String[] @default([])
+  h1Tag           String   @default("")
+  h2H3Tags        String[] @default([])
+  imageAltText    String[] @default([])
+  internalLinks   String   @default("[]")
   ogTitle         String   @default("")
   ogDescription   String   @default("")
   ogImage         String   @default("")
@@ -134,6 +140,7 @@ model PageSeo {
   schema          String   @default("")
   content         String   @default("")
   image           String   @default("")
+  implementationStatus String @default("pending")
   createdAt       DateTime @default(now())
   updatedAt       DateTime @updatedAt
 }

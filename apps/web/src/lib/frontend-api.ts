@@ -1,6 +1,9 @@
 import type {
   FaqRecord,
+  PageSeoInput,
+  PageSeoRecord,
   ProductRecord,
+  SeoUrlOptionRecord,
   ServiceAreaRecord,
   ServiceRecord,
   SiteSettingsRecord,
@@ -221,18 +224,27 @@ export async function updateSiteSettings(data: {
 // ── SEO entries ──────────────────────────────────────────────────
 
 export async function fetchSeoEntries() {
-  return fetchData<import('@/lib/content-types').PageSeoRecord>('/api/admin/seo', 1, 200);
+  return fetchData<PageSeoRecord>('/api/admin/seo', 1, 200);
+}
+
+export async function fetchSeoUrlOptions() {
+  const response = await fetch('/api/admin/seo/url-options', { cache: 'no-store' });
+  if (!response.ok) {
+    throw new Error(`Request failed for /api/admin/seo/url-options: ${response.status}`);
+  }
+  const payload = await parseJson<{ data: SeoUrlOptionRecord[] }>(response);
+  return payload?.data ?? [];
 }
 
 export async function fetchSeoById(id: string) {
   const response = await fetch(`/api/admin/seo/${id}`, { cache: 'no-store' });
   if (response.status === 404) return null;
   if (!response.ok) throw new Error(`Request failed for /api/admin/seo/${id}: ${response.status}`);
-  const payload = await parseJson<{ data: import('@/lib/content-types').PageSeoRecord }>(response);
+  const payload = await parseJson<{ data: PageSeoRecord }>(response);
   return payload?.data ?? null;
 }
 
-export async function createSeoEntry(data: Record<string, string>) {
+export async function createSeoEntry(data: PageSeoInput) {
   const response = await fetch('/api/admin/seo', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -245,7 +257,7 @@ export async function createSeoEntry(data: Record<string, string>) {
   return { ok: true as const, message: 'SEO entry created.' };
 }
 
-export async function updateSeoEntry(id: string, data: Record<string, string>) {
+export async function updateSeoEntry(id: string, data: Partial<PageSeoInput>) {
   const response = await fetch(`/api/admin/seo/${id}`, {
     method: 'PUT',
     headers: { 'Content-Type': 'application/json' },
@@ -265,4 +277,4 @@ export async function deleteSeoEntry(id: string) {
     return { ok: false as const, message: payload?.error ?? 'Failed to delete SEO entry.' };
   }
   return { ok: true as const, message: payload?.message ?? 'SEO entry deleted.' };
-}
+}

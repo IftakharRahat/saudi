@@ -97,14 +97,42 @@ type AdminDict = {
     seoManagementSub: string;
     pageSlug: string;
     pageSlugHint: string;
+    seoScopeHint: string;
+    selectPageUrl: string;
+    noUrlOptions: string;
+    alreadyConfiguredShort: string;
+    currentSavedUrl: string;
+    websitePages: string;
+    servicePages: string;
+    productPages: string;
     metaTitle: string;
     metaDescription: string;
+    focusKeyword: string;
+    secondaryKeywords: string;
+    secondaryKeywordsHint: string;
+    h1Tag: string;
+    h2H3Tags: string;
+    headingTagsHint: string;
+    imageAltText: string;
+    imageAltTextHint: string;
+    internalLinks: string;
+    internalLinkAnchor: string;
+    internalLinkUrl: string;
+    addInternalLink: string;
+    internalLinkValidation: string;
     ogTitle: string;
     ogDescription: string;
     ogImage: string;
     ogUrl: string;
     schemaJsonLd: string;
     schemaJsonLdHint: string;
+    advancedFields: string;
+    implementationStatus: string;
+    statusPending: string;
+    statusInProgress: string;
+    statusDone: string;
+    updatedAt: string;
+    urlAlreadyConfigured: string;
     contentText: string;
     pageImage: string;
     addSeoEntry: string;
@@ -201,17 +229,45 @@ const ADMIN_DICT: Record<'en' | 'ar', AdminDict> = {
 
         seo: 'SEO',
         seoManagement: 'SEO Management',
-        seoManagementSub: 'Manage meta tags, Open Graph, schema, and content for each page.',
-        pageSlug: 'Page Slug',
-        pageSlugHint: 'e.g. home, about, services/furniture-removal',
+        seoManagementSub: 'Manage live SEO metadata and planning fields for each public URL, including service and product detail pages.',
+        pageSlug: 'URL',
+        pageSlugHint: 'Choose a live page URL from the dropdown. The list refreshes automatically when pages or subpages are added.',
+        seoScopeHint: 'Editing SEO here updates only SEO metadata for this exact URL. It does not change the visible page content automatically.',
+        selectPageUrl: 'Select a page URL',
+        noUrlOptions: 'No page URLs are currently available for selection.',
+        alreadyConfiguredShort: 'Already configured',
+        currentSavedUrl: 'Current saved URL',
+        websitePages: 'Website Pages',
+        servicePages: 'Service Detail Pages',
+        productPages: 'Product Detail Pages',
         metaTitle: 'Meta Title',
         metaDescription: 'Meta Description',
+        focusKeyword: 'Focus Keyword',
+        secondaryKeywords: 'Secondary Keywords',
+        secondaryKeywordsHint: 'Enter one keyword per line or separate them with commas.',
+        h1Tag: 'H1 Tag',
+        h2H3Tags: 'H2 / H3 Tags',
+        headingTagsHint: 'Enter one heading per line.',
+        imageAltText: 'Image Alt Text',
+        imageAltTextHint: 'Add one image alt text value per line.',
+        internalLinks: 'Internal Links',
+        internalLinkAnchor: 'Anchor Text',
+        internalLinkUrl: 'Destination URL',
+        addInternalLink: 'Add Internal Link',
+        internalLinkValidation: 'Each internal link needs both anchor text and destination URL.',
         ogTitle: 'OG Title',
         ogDescription: 'OG Description',
         ogImage: 'OG Image URL',
         ogUrl: 'OG URL (Canonical)',
         schemaJsonLd: 'Schema (JSON-LD)',
         schemaJsonLdHint: 'Paste structured data JSON here.',
+        advancedFields: 'Advanced Fields',
+        implementationStatus: 'Implementation Status',
+        statusPending: 'Pending',
+        statusInProgress: 'In Progress',
+        statusDone: 'Done',
+        updatedAt: 'Updated',
+        urlAlreadyConfigured: 'This URL already has an SEO entry.',
         contentText: 'Content',
         pageImage: 'Page Image URL',
         addSeoEntry: 'Add SEO Entry',
@@ -306,17 +362,45 @@ const ADMIN_DICT: Record<'en' | 'ar', AdminDict> = {
 
         seo: 'تحسين محركات البحث',
         seoManagement: 'إدارة تحسين محركات البحث',
-        seoManagementSub: 'إدارة العلامات الوصفية و Open Graph والمخطط والمحتوى لكل صفحة.',
-        pageSlug: 'معرّف الصفحة',
-        pageSlugHint: 'مثال: home, about, services/furniture-removal',
+        seoManagementSub: 'إدارة بيانات SEO الحية وحقول التخطيط لكل رابط عام، بما في ذلك صفحات الخدمات والمنتجات التفصيلية.',
+        pageSlug: 'الرابط',
+        pageSlugHint: 'اختر رابط الصفحة من القائمة المنسدلة. يتم تحديث القائمة تلقائيًا عند إضافة صفحات أو صفحات فرعية جديدة.',
+        seoScopeHint: 'التعديل هنا يحدّث بيانات SEO لهذا الرابط فقط، ولا يغيّر محتوى الصفحة الظاهر تلقائيًا.',
+        selectPageUrl: 'اختر رابط الصفحة',
+        noUrlOptions: 'لا توجد روابط صفحات متاحة للاختيار حاليًا.',
+        alreadyConfiguredShort: 'تمت تهيئته',
+        currentSavedUrl: 'الرابط المحفوظ الحالي',
+        websitePages: 'صفحات الموقع',
+        servicePages: 'صفحات تفاصيل الخدمات',
+        productPages: 'صفحات تفاصيل المنتجات',
         metaTitle: 'عنوان الميتا',
         metaDescription: 'وصف الميتا',
+        focusKeyword: 'الكلمة المفتاحية الأساسية',
+        secondaryKeywords: 'الكلمات المفتاحية الثانوية',
+        secondaryKeywordsHint: 'أدخل كلمة في كل سطر أو افصل بينها بفواصل.',
+        h1Tag: 'وسم H1',
+        h2H3Tags: 'وسوم H2 / H3',
+        headingTagsHint: 'أدخل عنوانًا واحدًا في كل سطر.',
+        imageAltText: 'النص البديل للصور',
+        imageAltTextHint: 'أضف نصًا بديلاً واحدًا لكل سطر.',
+        internalLinks: 'الروابط الداخلية',
+        internalLinkAnchor: 'نص الرابط',
+        internalLinkUrl: 'رابط الوجهة',
+        addInternalLink: 'إضافة رابط داخلي',
+        internalLinkValidation: 'يجب أن يحتوي كل رابط داخلي على نص الرابط ورابط الوجهة معًا.',
         ogTitle: 'عنوان OG',
         ogDescription: 'وصف OG',
         ogImage: 'رابط صورة OG',
         ogUrl: 'رابط OG (الرابط الأساسي)',
         schemaJsonLd: 'المخطط (JSON-LD)',
         schemaJsonLdHint: 'الصق بيانات JSON المنظمة هنا.',
+        advancedFields: 'حقول متقدمة',
+        implementationStatus: 'حالة التنفيذ',
+        statusPending: 'قيد الانتظار',
+        statusInProgress: 'قيد التنفيذ',
+        statusDone: 'مكتمل',
+        updatedAt: 'آخر تحديث',
+        urlAlreadyConfigured: 'هذا الرابط لديه سجل SEO بالفعل.',
         contentText: 'المحتوى',
         pageImage: 'رابط صورة الصفحة',
         addSeoEntry: 'إضافة سجل SEO',

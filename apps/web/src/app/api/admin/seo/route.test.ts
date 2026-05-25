@@ -62,7 +62,7 @@ describe('admin SEO routes', () => {
   it('lists SEO entries with pagination metadata', async () => {
     mocks.prisma.pageSeo.count.mockResolvedValueOnce(1);
     mocks.prisma.pageSeo.findMany.mockResolvedValueOnce([
-      { id: 'seo_1', pageSlug: 'home', metaTitle: 'Home Page' },
+      { id: 'seo_1', pageSlug: 'home', metaTitle: 'Home Page', implementationStatus: 'done' },
     ]);
 
     const response = await GET(
@@ -72,6 +72,7 @@ describe('admin SEO routes', () => {
 
     expect(response.status).toBe(200);
     expect(payload.data).toHaveLength(1);
+    expect(payload.data[0].url).toBe('/');
     expect(payload.pagination).toEqual({
       page: 1,
       limit: 10,
@@ -84,17 +85,34 @@ describe('admin SEO routes', () => {
 
   it('creates a SEO entry', async () => {
     const body = {
+      url: '/about',
+      metaTitle: 'About Us',
+      metaDescription: 'Learn about Future Companies.',
+      internalLinks: [],
+    };
+    mocks.prisma.pageSeo.create.mockResolvedValueOnce({
+      id: 'seo_2',
       pageSlug: 'about',
       metaTitle: 'About Us',
       metaDescription: 'Learn about Future Companies.',
-    };
-    mocks.prisma.pageSeo.create.mockResolvedValueOnce({ id: 'seo_2', ...body });
+      internalLinks: '[]',
+      implementationStatus: 'pending',
+    });
 
     const response = await POST(asJsonRequest('http://localhost/api/admin/seo', body));
     const payload = await response.json();
 
     expect(response.status).toBe(201);
     expect(payload.data.id).toBe('seo_2');
+    expect(payload.data.url).toBe('/about');
+    expect(mocks.prisma.pageSeo.create).toHaveBeenCalledWith(
+      expect.objectContaining({
+        data: expect.objectContaining({
+          pageSlug: 'about',
+          internalLinks: '[]',
+        }),
+      })
+    );
   });
 
   it('updates a SEO entry by id', async () => {
@@ -120,6 +138,7 @@ describe('admin SEO routes', () => {
     mocks.prisma.pageSeo.findUnique.mockResolvedValueOnce({
       id: 'seo_1',
       pageSlug: 'home',
+      internalLinks: '[]',
     });
     mocks.prisma.pageSeo.delete.mockResolvedValueOnce({ id: 'seo_1' });
 
@@ -137,6 +156,7 @@ describe('admin SEO routes', () => {
 
     expect(getResponse.status).toBe(200);
     expect(getPayload.data.id).toBe('seo_1');
+    expect(getPayload.data.url).toBe('/');
     expect(deleteResponse.status).toBe(200);
     expect(deletePayload.message).toBe('SEO entry deleted.');
   });
