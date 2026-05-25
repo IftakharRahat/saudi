@@ -95,18 +95,56 @@ export type SiteSettingsRecord = {
   updatedAt: string;
 };
 
+export type SeoImplementationStatus = 'pending' | 'in_progress' | 'done';
+
+export type SeoInternalLinkRecord = {
+  anchorText: string;
+  destinationUrl: string;
+};
+
 export type PageSeoRecord = {
   id: string;
-  pageSlug: string;
+  url: string;
   metaTitle: string;
   metaDescription: string;
+  focusKeyword: string;
+  secondaryKeywords: string[];
+  h1Tag: string;
+  h2H3Tags: string[];
+  imageAltText: string[];
+  internalLinks: SeoInternalLinkRecord[];
   ogTitle: string;
   ogDescription: string;
   ogImage: string;
   ogUrl: string;
   schema: string;
-  content: string;
-  image: string;
+  implementationStatus: SeoImplementationStatus;
   createdAt: string;
   updatedAt: string;
-};
+};
+
+export type PageSeoInput = {
+  url: string;
+  metaTitle: string;
+  metaDescription: string;
+  focusKeyword: string;
+  secondaryKeywords: string[];
+  h1Tag: string;
+  h2H3Tags: string[];
+  imageAltText: string[];
+  internalLinks: SeoInternalLinkRecord[];
+  ogTitle: string;
+  ogDescription: string;
+  ogImage: string;
+  ogUrl: string;
+  schema: string;
+  implementationStatus: SeoImplementationStatus;
+};
+
+export type SeoUrlOptionGroup = 'website_pages' | 'service_pages' | 'product_pages';
+
+export type SeoUrlOptionRecord = {
+  url: string;
+  label: string;
+  group: SeoUrlOptionGroup;
+};

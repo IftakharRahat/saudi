@@ -1,0 +1,35 @@
+CREATE TABLE IF NOT EXISTS "PageSeo" (
+    "id" TEXT NOT NULL,
+    "pageSlug" TEXT NOT NULL,
+    "metaTitle" TEXT NOT NULL DEFAULT '',
+    "metaDescription" TEXT NOT NULL DEFAULT '',
+    "focusKeyword" TEXT NOT NULL DEFAULT '',
+    "secondaryKeywords" TEXT[] NOT NULL DEFAULT ARRAY[]::TEXT[],
+    "h1Tag" TEXT NOT NULL DEFAULT '',
+    "h2H3Tags" TEXT[] NOT NULL DEFAULT ARRAY[]::TEXT[],
+    "imageAltText" TEXT[] NOT NULL DEFAULT ARRAY[]::TEXT[],
+    "internalLinks" TEXT NOT NULL DEFAULT '[]',
+    "ogTitle" TEXT NOT NULL DEFAULT '',
+    "ogDescription" TEXT NOT NULL DEFAULT '',
+    "ogImage" TEXT NOT NULL DEFAULT '',
+    "ogUrl" TEXT NOT NULL DEFAULT '',
+    "schema" TEXT NOT NULL DEFAULT '',
+    "content" TEXT NOT NULL DEFAULT '',
+    "image" TEXT NOT NULL DEFAULT '',
+    "implementationStatus" TEXT NOT NULL DEFAULT 'pending',
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+    CONSTRAINT "PageSeo_pkey" PRIMARY KEY ("id")
+);
+
+CREATE UNIQUE INDEX IF NOT EXISTS "PageSeo_pageSlug_key" ON "PageSeo"("pageSlug");
+
+ALTER TABLE "PageSeo"
+    ADD COLUMN IF NOT EXISTS "focusKeyword" TEXT NOT NULL DEFAULT '',
+    ADD COLUMN IF NOT EXISTS "secondaryKeywords" TEXT[] NOT NULL DEFAULT ARRAY[]::TEXT[],
+    ADD COLUMN IF NOT EXISTS "h1Tag" TEXT NOT NULL DEFAULT '',
+    ADD COLUMN IF NOT EXISTS "h2H3Tags" TEXT[] NOT NULL DEFAULT ARRAY[]::TEXT[],
+    ADD COLUMN IF NOT EXISTS "imageAltText" TEXT[] NOT NULL DEFAULT ARRAY[]::TEXT[],
+    ADD COLUMN IF NOT EXISTS "internalLinks" TEXT NOT NULL DEFAULT '[]',
+    ADD COLUMN IF NOT EXISTS "implementationStatus" TEXT NOT NULL DEFAULT 'pending';

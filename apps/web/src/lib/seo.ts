@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { pageSeoKeyFromIdentifier } from '@/lib/page-seo';
 import { prisma } from '@/lib/prisma';
 
 /**
@@ -15,8 +16,6 @@ type SeoRow = {
   ogImage: string;
   ogUrl: string;
   schema: string;
-  content: string;
-  image: string;
 };
 
 /**
@@ -25,8 +24,9 @@ type SeoRow = {
  */
 export async function getPageSeo(slug: string): Promise<SeoRow | null> {
   try {
+    const pageSlug = pageSeoKeyFromIdentifier(slug);
     const row = await prisma.pageSeo.findUnique({
-      where: { pageSlug: slug },
+      where: { pageSlug },
       select: {
         metaTitle: true,
         metaDescription: true,
@@ -35,8 +35,6 @@ export async function getPageSeo(slug: string): Promise<SeoRow | null> {
         ogImage: true,
         ogUrl: true,
         schema: true,
-        content: true,
-        image: true,
       },
     });
     return row;

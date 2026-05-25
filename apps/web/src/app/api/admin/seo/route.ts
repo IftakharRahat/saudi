@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { createPaginationMeta, parsePaginationParams } from '@/lib/api-query';
 import { requireAdmin } from '@/lib/admin-auth';
+import { toPageSeoCreateData, toPageSeoRecord } from '@/lib/page-seo';
 import { prisma } from '@/lib/prisma';
 import { seoCreateSchema } from '@/lib/validation';
 
@@ -26,7 +27,7 @@ export async function GET(request: Request) {
     ]);
 
     return NextResponse.json({
-      data: entries,
+      data: entries.map((entry) => toPageSeoRecord(entry)),
       pagination: createPaginationMeta(total, page, limit),
     });
   } catch (error) {
@@ -60,12 +61,11 @@ export async function POST(request: Request) {
 
   try {
     const entry = await prisma.pageSeo.create({
-      data: parsed.data,
+      data: toPageSeoCreateData(parsed.data),
     });
 
-    return NextResponse.json({ data: entry }, { status: 201 });
+    return NextResponse.json({ data: toPageSeoRecord(entry) }, { status: 201 });
   } catch (error) {
-    // Check for unique constraint violation on pageSlug
     if (
       error &&
       typeof error === 'object' &&
@@ -73,7 +73,7 @@ export async function POST(request: Request) {
       (error as { code: string }).code === 'P2002'
     ) {
       return NextResponse.json(
-        { error: 'A SEO entry for this page slug already exists.' },
+        { error: 'A SEO entry for this URL already exists.' },
         { status: 409 }
       );
     }

@@ -29,7 +29,7 @@ const arrayFromUnknown = z.preprocess((value) => {
       }
     } catch {
       return trimmed
-        .split(',')
+        .split(/[\n,]/)
         .map((item) => item.trim())
         .filter(Boolean);
     }
@@ -184,32 +184,69 @@ export const serviceAreaUpdateSchema = z
 
 const optionalUrl = z.string().trim().max(2048).default('');
 const optionalText = z.string().trim().max(10000).default('');
+const seoImplementationStatusSchema = z.enum(['pending', 'in_progress', 'done']);
+const internalLinksFromUnknown = z.preprocess((value) => {
+  if (Array.isArray(value)) {
+    return value;
+  }
+
+  if (typeof value === 'string') {
+    const trimmed = value.trim();
+    if (!trimmed) {
+      return [];
+    }
+
+    try {
+      const parsed = JSON.parse(trimmed);
+      if (Array.isArray(parsed)) {
+        return parsed;
+      }
+    } catch {
+      return value;
+    }
+  }
+
+  return value;
+}, z.array(z.object({
+  anchorText: z.string().trim().min(1).max(300),
+  destinationUrl: z.string().trim().min(1).max(2048),
+})).max(50));
 
 export const seoCreateSchema = z.object({
-  pageSlug: z.string().trim().min(1).max(200),
+  url: z.string().trim().min(1).max(2048),
   metaTitle: z.string().trim().max(200).default(''),
   metaDescription: z.string().trim().max(1000).default(''),
+  focusKeyword: z.string().trim().max(300).default(''),
+  secondaryKeywords: arrayFromUnknown.default([]),
+  h1Tag: z.string().trim().max(300).default(''),
+  h2H3Tags: arrayFromUnknown.default([]),
+  imageAltText: arrayFromUnknown.default([]),
+  internalLinks: internalLinksFromUnknown.default([]),
   ogTitle: z.string().trim().max(200).default(''),
   ogDescription: z.string().trim().max(1000).default(''),
   ogImage: optionalUrl,
   ogUrl: optionalUrl,
   schema: optionalText,
-  content: optionalText,
-  image: optionalUrl,
+  implementationStatus: seoImplementationStatusSchema.default('pending'),
 });
 
 export const seoUpdateSchema = z
   .object({
-    pageSlug: z.string().trim().min(1).max(200),
+    url: z.string().trim().min(1).max(2048),
     metaTitle: z.string().trim().max(200),
     metaDescription: z.string().trim().max(1000),
+    focusKeyword: z.string().trim().max(300),
+    secondaryKeywords: arrayFromUnknown,
+    h1Tag: z.string().trim().max(300),
+    h2H3Tags: arrayFromUnknown,
+    imageAltText: arrayFromUnknown,
+    internalLinks: internalLinksFromUnknown,
     ogTitle: z.string().trim().max(200),
     ogDescription: z.string().trim().max(1000),
     ogImage: z.string().trim().max(2048),
     ogUrl: z.string().trim().max(2048),
     schema: z.string().trim().max(10000),
-    content: z.string().trim().max(10000),
-    image: z.string().trim().max(2048),
+    implementationStatus: seoImplementationStatusSchema,
   })
   .partial()
   .refine((value) => Object.keys(value).length > 0, 'At least one field is required for update.');
